@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      框架篇 
+      
+      
+    
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:400,400italic,600|Roboto+Mono" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+
+
+  
+
+  
+    
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <a href="/">LEEDOM</a>
+</div>
+
+
+      <p class="links">
+  
+    <a title="archives" target="" href="/archives/">
+      <i class="iconfont icon-bookmark"></i>
+    </a>
+  
+    <a title="github" target="_blank" href="https://github.com/leedom92/hexo-theme-leedom">
+      <i class="iconfont icon-github"></i>
+    </a>
+  
+    <a title="email" target="" href="">
+      <i class="iconfont icon-envelope"></i>
+    </a>
+  
+    <a title="facebook" target="" href="">
+      <i class="iconfont icon-facebooksquare"></i>
+    </a>
+  
+    <a title="twitter" target="" href="">
+      <i class="iconfont icon-twitter"></i>
+    </a>
+  
+    <a title="wechat" target="" href="">
+      <i class="iconfont icon-wechat"></i>
+    </a>
+  
+    <a title="weibo" target="" href="">
+      <i class="iconfont icon-weibo"></i>
+    </a>
+  
+    <a title="rss" target="_blank" href="/atom.xml">
+      <i class="iconfont icon-rss"></i>
+    </a>
+  
+</p>
+
+
+      <div class="main">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+<div class="post">
+  <h3 class="date">
+    Jan 11, 2023
+  </h3>
+  <h1>
+    框架篇
+  </h1>
+  <div class="content markdown-body">
+    <h2 id="一、SpringBoot面试题"><a href="#一、SpringBoot面试题" class="headerlink" title="一、SpringBoot面试题"></a>一、SpringBoot面试题</h2><h3 id="1-SpringBoot优点"><a href="#1-SpringBoot优点" class="headerlink" title="1.SpringBoot优点"></a>1.SpringBoot优点</h3><ol>
+<li>独立运行：SpringBoot内嵌了Tomcat，只需打包成jar包即可运行。</li>
+<li>简化maven配置：SpringBoot提供了各种starter启动器，简化了maven的依赖导入和版本冲突。</li>
+<li>简化配置：SpringBoot在配置时无需代码生成和无需xml配置。</li>
+<li>自动配置：SpringBoot根据当前类路径下的类,jar包可以自动配置bean，添加到容器中。</li>
+<li>应用监控：SpringBoot提供了一系列端点来监控服务和应用，做健康检测。</li>
+</ol>
+<h3 id="2-SpringBoot的核心注解"><a href="#2-SpringBoot的核心注解" class="headerlink" title="2.SpringBoot的核心注解"></a>2.SpringBoot的核心注解</h3><p>启动类上的注解@SpringBootApplication，是SpringBoot的核心注解，它由三个注解组成：</p>
+<ol>
+<li>@SpringBootConfiguration：实现配置文件的功能</li>
+<li>@EnableAutoConfiguration：开启自动配置功能</li>
+<li>@ComponentScan：组件扫描功能</li>
+</ol>
+<h3 id="3-SpringBoot的核心配置文件是什么"><a href="#3-SpringBoot的核心配置文件是什么" class="headerlink" title="3.SpringBoot的核心配置文件是什么"></a>3.SpringBoot的核心配置文件是什么</h3><p>在一般开发中，不经常使用bootstrap.properties文件，但在结合SpringCloud时，会使用到该配置文件，常用于加载一些远程配置文件。</p>
+<p>SpringBoot的两个核心配置文件：</p>
+<ol>
+<li>bootstrap：由父ApplicationContext加载，比application优先加载。一般在Nacos中使用到，并且bootstrap中配置的属性不能被覆盖。</li>
+<li>application：由ApplicationContext加载，用于SpringBoot项目的自动化配置。</li>
+</ol>
+<h3 id="4-Spring-Boot-starters是什么"><a href="#4-Spring-Boot-starters是什么" class="headerlink" title="4.Spring Boot starters是什么"></a>4.Spring Boot starters是什么</h3><p>定义：SpringBoot-starters可以理解为启动器，starters包含了许多项目中需要使用到的相关依赖，简化maven配置。</p>
+<p>命名：SpringBoot官方的启动器以spring-boot-starter开头命名的，而第三方启动器不能以该方式开头命名，一般命名为名称+spring-boot-starter，例如mybatis-spring-boot-starter。</p>
+<p>分类：starters可以分为：应用类启动器(如spring-boot-starter-web：使用SpringMVC构建web应用)、生产类启动器(spring-boot-starter-actuator：提供生产环境)、技术类启动器(如spring-boot-starter-json：提供json数据的读写支持)。</p>
+<h3 id="5-SpringBoot内嵌哪些servlet容器"><a href="#5-SpringBoot内嵌哪些servlet容器" class="headerlink" title="5.SpringBoot内嵌哪些servlet容器"></a>5.SpringBoot内嵌哪些servlet容器</h3><p>SpringBoot内嵌了三种servlet容器，分别为Tomcat、jetty、undertow，默认是Tomcat。</p>
+<p>如果要在项目中使用jetty的话，需要在spring-boot-starter-web中使用<exclusion>标签移除tomcat依赖，并引入spring-boot-starter-jetty依赖即可。</p>
+<h3 id="6-SpringBoot常用的两种配置方式"><a href="#6-SpringBoot常用的两种配置方式" class="headerlink" title="6.SpringBoot常用的两种配置方式"></a>6.SpringBoot常用的两种配置方式</h3><p>SpringBoot支持properties和yaml配置方式，并且properties的优先级高于yaml。yaml配置的数据更加结构化，使用缩进表示层级关系。</p>
+<h3 id="7-SpringBoot读取配置文件的方式"><a href="#7-SpringBoot读取配置文件的方式" class="headerlink" title="7.SpringBoot读取配置文件的方式"></a>7.SpringBoot读取配置文件的方式</h3><p>常用的读取配置文件方式有四种：</p>
+<ol>
+<li><p>使用@Value读取配置文件</p>
+<blockquote>
+<p>通过@Value(“${}”)方式读取某个配置项，一般用于读取单个配置项。</p>
+</blockquote>
+</li>
+<li><p>使用@ConfigurationProperties(prefix&#x3D;”xx”)读取配置文件</p>
+<blockquote>
+<p>该方式的@ConfigurationProperties需要和注入容器的注解如@Configuration、@Component等一起使用，才能将该配置读取类注入到容器中，在其他地方使用时直接@Autowired即可。或者就是在某一个类上使用@EnableConfigurationProperties(aa.class)注解就可以直接将该配置读取类aa注入到容器中，使用时直接@Autowired即可。</p>
+<p>该方式用于读取前缀prefix为xx的配置项，一般用于读取一组配置项。</p>
+</blockquote>
+</li>
+<li><p>使用Environment读取配置文件</p>
+<blockquote>
+<p>Environment是一个读取配置文件的类，只需要使用@Autowired将Environment类注入到某个类中，然后调用该类的getProperty()方法就可以获取某个配置项。</p>
+</blockquote>
+</li>
+<li><p>使用@PropertySource读取配置文件</p>
+<blockquote>
+<p>该方式用来读取某个配置文件，类上使用@PropertySource(value&#x3D;”classpath:application.properties”)读取配置文件。</p>
+<p>注意：该注解@PropertySource只能读取properties格式的配置文件，不能读取yml格式的配置文件。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="8-SpringBoot的自动配置原理"><a href="#8-SpringBoot的自动配置原理" class="headerlink" title="8.SpringBoot的自动配置原理"></a>8.SpringBoot的自动配置原理</h3><p>1.什么是自动装配？</p>
+<blockquote>
+<p>SpringBoot在启动时会扫描引入外部jar包中的<code>META-INT/Spring.factories</code>文件，将文件中定义的配置类加载到Spring容器中进行管理，就可以实现其提供的具体功能。</p>
+</blockquote>
+<p>2.自动装配原理？</p>
+<blockquote>
+<p>首先，SpringBoot的核心注解是@SpringBootApplication复合注解，由@SpringBootConfiguration、@ComponentScan、@EnableAutoConfiguration注解构成。</p>
+<p>@SpringBootConfiguration：标明当前启动类是一个配置类</p>
+<p>@ComponentScan：扫描标记为bean的组件并将其注入到Spring容器中</p>
+<p>@EnableAutoConfiguration：用于开启自动配置功能，它是实现自动装配的核心注解。 该注解由两个注解构成：@AutoConfigurationPackage、@Import(AutoConfigurationImportSelector.class)。</p>
+<ol>
+<li>@AutoConfigurationPackage：指定默认的包规则，它会扫描主程序类所在包及其子包下所有的组件并注入到Spring容器中。</li>
+<li>@Import注解会导入AutoConfigurationImportSelector类，它是实现自动装配功能的核心类，用于加载自动装配类。它的底层实现是调用了这个类的getAutoConfigurationEntry()方法，负责加载配置类。然后又间接地调用了loadSpringFactories()方法，它会查找所有<code>META-INF/Spring.factories</code>位置的文件，该文件中配置了项目启动时要加载的自动配置类，在项目启动时默认会全部加载。但最终会根据SpringBoot的条件装配规则@Conditional注解实现按需加载配置类，也就是说，只有在满足条件时配置类才会加载并生效。</li>
+</ol>
+</blockquote>
+<h2 id="二、Spring面试题"><a href="#二、Spring面试题" class="headerlink" title="二、Spring面试题"></a>二、Spring面试题</h2><h3 id="1-什么是IOC"><a href="#1-什么是IOC" class="headerlink" title="1.什么是IOC"></a>1.什么是IOC</h3><p>IOC：控制反转，即将开发人员手动创建对象的控制权，对象之间的依赖以及对象的生命周期交给Spring容器管理，实现控制反转，在需要用到的地方直接注入即可，降低代码的耦合性。</p>
+<h3 id="2-什么是AOP"><a href="#2-什么是AOP" class="headerlink" title="2.什么是AOP"></a>2.什么是AOP</h3><p>AOP：即面向切面编程，将那些与业务无关，但又被业务模块所共同调用的公共代码抽取出来，在需要用到的地方直接使用即可，降低代码之间的耦合，提高程序的拓展性和可维护性。</p>
+<p>AOP是基于动态代理的，有两种代理方式：</p>
+<ol>
+<li><p>JDK动态代理：代理类和被代理类实现同一个接口，可以使用JDK动态代理。</p>
+</li>
+<li><p>CGLIB动态代理：被代理类没有实现接口，可以使用CGLIB动态代理，即创建被代理类的子类作为代理。</p>
+</li>
+</ol>
+<p>应用场景：权限控制，日志管理，事务管理等。</p>
+<h3 id="3-Spring中bean的作用域有几种"><a href="#3-Spring中bean的作用域有几种" class="headerlink" title="3.Spring中bean的作用域有几种"></a>3.Spring中bean的作用域有几种</h3><ol>
+<li>singleton：唯一bean实例，Spring中默认的bean是单例的</li>
+<li>prototype：每次请求都会创建一个新的bean</li>
+<li>request：每次HTTP请求生成一个新的bean，该bean只在当前request内有效</li>
+<li>session：每次HTTP请求生成一个新的bean，该bean只在当前session内有效</li>
+<li>global-session：全局session作用域（Spring5已经没有了）</li>
+</ol>
+<h3 id="4-Spring的单例bean存在线程安全问题吗"><a href="#4-Spring的单例bean存在线程安全问题吗" class="headerlink" title="4.Spring的单例bean存在线程安全问题吗"></a>4.Spring的单例bean存在线程安全问题吗</h3><p>Spring中的单例bean存在线程安全问题，当有多个线程操作同一对象时，对该对象内的非静态成员变量进行写操作时，会存在线程安全问题。</p>
+<p>解决方法：</p>
+<ol>
+<li>在bean对象中尽量避免定义可变的变量</li>
+<li>使用ThreadLocal，将共享数据保存到ThreadLocal中，为每个线程提供一个该共享数据的副本。</li>
+</ol>
+<h3 id="5-Spring框架中使用了哪些设计模式"><a href="#5-Spring框架中使用了哪些设计模式" class="headerlink" title="5.Spring框架中使用了哪些设计模式"></a>5.Spring框架中使用了哪些设计模式</h3><ol>
+<li>工厂模式：Spring使用工厂模式通过<code>BeanFactory</code>、<code>ApplicationContext</code>创建bean对象</li>
+<li>代理模式：Spring AOP是基于动态代理实现的</li>
+<li>单例模式：Spring中默认的Bean都是单例的</li>
+<li>适配器模式：Spring AOP的通知或增强(Advice)使用了适配器模式，SpringMVC通过适配器模式来适配Controller</li>
+<li>观察者模式：Spring中的事件驱动模型使用到了观察者模式</li>
+</ol>
+<h3 id="6-Spring管理事务的方式有几种"><a href="#6-Spring管理事务的方式有几种" class="headerlink" title="6.Spring管理事务的方式有几种"></a>6.Spring管理事务的方式有几种</h3><ol>
+<li>编程式事务：通过硬编码方式管理事务</li>
+<li>声明式事务：通过配置文件的方式管理事务（推荐）<ol>
+<li>基于xml的声明式事务</li>
+<li>基于注解的声明式事务</li>
+</ol>
+</li>
+</ol>
+<h3 id="7-Spring事务的隔离级别有几种"><a href="#7-Spring事务的隔离级别有几种" class="headerlink" title="7.Spring事务的隔离级别有几种"></a>7.Spring事务的隔离级别有几种</h3><p>TransactionDefinition接口定义了5种隔离级别的常量：</p>
+<ol>
+<li><p>DEFAULT：使用后端数据库默认的隔离级别。MySQL默认的隔离级别是REPEATABLE_READ。</p>
+</li>
+<li><p>READ_UNCOMMITED：允许读取未提交的数据，可能会导致脏读、幻读和不可重复读。</p>
+</li>
+<li><p>READ_COMMITED：允许读取已提交的数据，可以解决脏读，但可能导致幻读和不可重复读。</p>
+</li>
+<li><p>REPEATABLE_READ：可重复读，即对同一数据的读取结果是一致的，除非该数据被当前事务本身所修改，可以解决脏读和不可重复读，但可能导致幻读。</p>
+</li>
+<li><p>SERIALIZABLE：可序列化，最高的隔离级别，可以解决脏读，幻读和不可重复读，完全服从ACID的隔离级别，所有事务依次逐个进行，因此会严重影响程序的性能，一般不会使用。</p>
+</li>
+</ol>
+<h3 id="8-Spring事务的传播行为有几种"><a href="#8-Spring事务的传播行为有几种" class="headerlink" title="8.Spring事务的传播行为有几种"></a>8.Spring事务的传播行为有几种</h3><p>TransationDefinition接口定义了7种传播行为的常量：</p>
+<p><strong>支持当前事务的：</strong></p>
+<ol>
+<li>PROPAGATION_REQUIRED：如果当前存在事务，则加入该事务；否则，创建一个新的事务。</li>
+<li>PROPAGATION_SUPPORTS：如果当前事务，则加入该事务；否则，以非事务方式运行。</li>
+<li>PROPAGATION_MANDATORY：如果当前存在事务，则加入该事务；否则，抛出异常。</li>
+</ol>
+<p><strong>不支持当前事务的：</strong></p>
+<ol>
+<li>PROPAGATION_REQUIRES_NEW：创建一个新的事务，如果当前存在事务，则将当前事务挂起。</li>
+<li>PROPAGATION_NOT_SUPPORTED：以非事务方式运行，如果当前存在事务，则将当前事务挂起。</li>
+<li>PROPAGATION_NEVER：以非事务方式运行，如果当前存在事务，则抛出异常。</li>
+</ol>
+<p><strong>嵌套事务：</strong></p>
+<ol>
+<li>PROPAGATION_NESTED：如果当前存在事务，则创建一个事务嵌套在当前事务内运行；否则，则等价于REQUIRED方式操作。</li>
+</ol>
+<h3 id="9-什么是-Transactional注解"><a href="#9-什么是-Transactional注解" class="headerlink" title="9.什么是@Transactional注解"></a>9.什么是@Transactional注解</h3><p>@Transactional注解可以进行事务管理，当前方法出现异常时，会进行事务回滚，能够保证数据的一致性。</p>
+<p>@Transactional可以标注在类或方法上。当@Transactional标注在类上时，当前类的所有public方法都具有事务功能，当@Transactional标注在方法上，则只有当前方法具有事务功能。</p>
+<p>@Transactional默认是在发生运行时异常时进行回滚，如果想要事务在发生非运行时异常时也回滚的话，则只需要在@Transactional注解中加上rollbackFor&#x3D;Exception.class属性即可。</p>
+<h3 id="10-SpringMVC工作流程"><a href="#10-SpringMVC工作流程" class="headerlink" title="10.SpringMVC工作流程"></a>10.SpringMVC工作流程</h3><ol>
+<li>客户端发起请求到前端控制器DispatcherServlet</li>
+<li>DispatcherServlet接收到请求后会调用HandlerMapping去解析出Handler</li>
+<li>DispatcherServlet将解析出的Handler交给ControllerAdapter，该适配器会根据Handler去调用真正的Controller控制器去处理本次请求，并返回ModelAndView给DispatcherServlet</li>
+<li>DispatcherServlet会将ModelAndView交给ViewResolver视图解析器，返回真正的视图View</li>
+<li>DispatcherServlet将模型数据填充到视图中，进行视图渲染</li>
+<li>最后将视图View展示到客户端</li>
+</ol>
+
+  </div>
+  
+    
+      <a id="older" class="blog-nav" href="/2023/01/11/%E9%9B%86%E5%90%88%E7%AF%87/">OLDER&nbsp;&gt;</a>
+      
+        
+            
+</div>
+        <div class="footer">
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Copyright © Leedom 2021</a>
+        
+    </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Theme by Leedom | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-box">
+        <div class="search-title">
+          <!-- <span class="search-icon-input">
+            <a href="javascript: void(0)">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </span> -->
+          
+            <input type="text" class="search-input" id="search-input" placeholder="$ grep...">
+          
+          <span class="search-close-icon" id="search-close-icon">
+            <a href="javascript: void(0)">
+              <i class="iconfont icon-close"></i>
+            </a>
+          </span>
+        </div>
+        <div class="search-result" id="search-result"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    // inputArea.onclick = function() {
+    //   getSearchFile()
+    //   this.onclick = null
+    // }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        inputArea.focus()
+        getSearchFile()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'><span></ul>";
+      // $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'><h2>" + orig_data_title + "</h2></a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<h3 class=\"search-result-abstract\">" + match_content + "...</h3>"
+                }
+                str += "<hr></li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/leedom92/hexo-theme-leedom#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

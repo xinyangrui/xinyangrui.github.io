@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      基础篇 
+      
+      
+    
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:400,400italic,600|Roboto+Mono" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+
+
+  
+
+  
+    
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <a href="/">LEEDOM</a>
+</div>
+
+
+      <p class="links">
+  
+    <a title="archives" target="" href="/archives/">
+      <i class="iconfont icon-bookmark"></i>
+    </a>
+  
+    <a title="github" target="_blank" href="https://github.com/leedom92/hexo-theme-leedom">
+      <i class="iconfont icon-github"></i>
+    </a>
+  
+    <a title="email" target="" href="">
+      <i class="iconfont icon-envelope"></i>
+    </a>
+  
+    <a title="facebook" target="" href="">
+      <i class="iconfont icon-facebooksquare"></i>
+    </a>
+  
+    <a title="twitter" target="" href="">
+      <i class="iconfont icon-twitter"></i>
+    </a>
+  
+    <a title="wechat" target="" href="">
+      <i class="iconfont icon-wechat"></i>
+    </a>
+  
+    <a title="weibo" target="" href="">
+      <i class="iconfont icon-weibo"></i>
+    </a>
+  
+    <a title="rss" target="_blank" href="/atom.xml">
+      <i class="iconfont icon-rss"></i>
+    </a>
+  
+</p>
+
+
+      <div class="main">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+<div class="post">
+  <h3 class="date">
+    Jan 11, 2023
+  </h3>
+  <h1>
+    基础篇
+  </h1>
+  <div class="content markdown-body">
+    <h2 id="一、Java基础篇"><a href="#一、Java基础篇" class="headerlink" title="一、Java基础篇"></a>一、Java基础篇</h2><h3 id="1-重载和重写的区别"><a href="#1-重载和重写的区别" class="headerlink" title="1. 重载和重写的区别"></a>1. 重载和重写的区别</h3><p>重载：一个类中多个同名方法根据传入参数的不同来执行不同的逻辑</p>
+<p>重写：子类对父类的允许访问的方法进行重新编写</p>
+<p><strong>区别：</strong></p>
+<ol>
+<li><p>重载：发生在编译期，并且发生在同一个类中，方法名必须相同，参数列表必须不同(包括参数类型，参数个数，参数顺序)；返回值和访问修饰符可以不同。</p>
+</li>
+<li><p>重写：发生在运行期，发生在子类中，方法名，参数列表必须相同，并且子类方法的返回值类型要小于等于父类方法的返回值类型（补充：如果父类方法的返回类型为void或基本数据类型，则子类方法的返回类型不能修改）；子类方法抛出的异常要小于等于父类方法抛出的异常；子类方法的访问修饰符要大于等于父类方法的访问修饰符。</p>
+</li>
+</ol>
+<h3 id="2-面向对象的三大特性"><a href="#2-面向对象的三大特性" class="headerlink" title="2. 面向对象的三大特性"></a>2. 面向对象的三大特性</h3><p><strong>封装：</strong>封装是将一个对象的属性私有化，同时提供一些可以被外界访问的公有方法。</p>
+<p><strong>继承：</strong>通过继承一个类，可以使用该父类的功能，复用该父类的代码，并且可以新增新的属性和方法。</p>
+<p><strong>多态：</strong>一个引用变量指向具体哪个类的实例对象和该引用变量调用的方法具体是哪个类的方法，在编译期间无法确定，必须在运行期间才能确定。多态的两种形式：继承类和实现接口。</p>
+<h3 id="3-StringBuilder和StringBuffer的区别"><a href="#3-StringBuilder和StringBuffer的区别" class="headerlink" title="3. StringBuilder和StringBuffer的区别"></a>3. StringBuilder和StringBuffer的区别</h3><p><strong>可变性：</strong>StringBuilder和StringBuffer都继承自AbstractStringBuilder类，它们都没有使用final关键字修饰字符数组，所以StringBuilder和StringBuffer都是可变的，而String对象是不可变的。</p>
+<p><strong>线程安全性：</strong>StringBuilder是线程不安全的，其内部没有对方法加同步锁；而StringBuffer是线程安全的，其内部对方法加了同步锁。</p>
+<p><strong>性能：</strong>StringBuilder的性能比StringBuffer的性能要高10%~15%。</p>
+<h3 id="4-接口和抽象类的区别"><a href="#4-接口和抽象类的区别" class="headerlink" title="4. 接口和抽象类的区别"></a>4. 接口和抽象类的区别</h3><ol>
+<li>接口中的方法默认是public，并且接口中的方法只能是抽象方法；而抽象类中可以有非抽象方法。</li>
+<li>接口中的变量必须是静态常量；而抽象类中的变量可以是任意类型的。</li>
+<li>接口中的访问修饰符默认是public；而抽象类的访问修饰符可以是public，protected，default。(抽象方法就是为了重写而定义的，所以修饰符不能是private)</li>
+<li>一个类可以实现多个接口，但只能继承一个抽象类。</li>
+<li>从设计层面来看，抽象是对类的抽象，是一种模板设计；接口是对行为的抽象，是一种行为规范。</li>
+</ol>
+<p>补充：</p>
+<p>jdk8开始，接口可以有默认的实现方法和静态方法。</p>
+<p>jdk9开始，接口可以有私有方法和私有静态方法。</p>
+<h3 id="5-成员变量和局部变量的区别"><a href="#5-成员变量和局部变量的区别" class="headerlink" title="5. 成员变量和局部变量的区别"></a>5. 成员变量和局部变量的区别</h3><ol>
+<li>语法形式：成员变量可以被public,private,static等关键字修饰；而局部变量不能被访问修饰符和static修饰，但二者都可以被final关键字修饰。</li>
+<li>生存时间：成员变量是对象的一部分，它随着对象的创建而存在；而局部变量存在于方法中，它随着方法的调用而消失。（用final修饰的成员变量和局部变量都存放在堆中，而不是栈中）</li>
+<li>赋值方面：成员变量在定义时可以不赋初值，则会默认赋值（如果被final修饰则必须显示地赋值）；而局部变量在定义时必须赋初值。</li>
+</ol>
+<h3 id="6-hashCode-和equals"><a href="#6-hashCode-和equals" class="headerlink" title="6. hashCode()和equals()"></a>6. hashCode()和equals()</h3><p>hashCode()方法的作用是：获取哈希码，用于确定该对象在哈希表中的索引位置。hashCode()方法定义在Object类中。</p>
+<ol>
+<li>下面以”HashSet如何检查重复”为例来说明为什么要有hashCode()：</li>
+</ol>
+<p>当把一个对象加入到HashSet()时，会先根据对象的hashCode值计算对象加入的位置，同时会与HashSet中其他已加入对象的hashCode值进行比较，如果不相同，则说明对象没有重复出现；如果有hashCode值相同的对象，则会调用equals()方法来判断hashCode值相同的对象是否真的相同，如果相同，则说明两个对象相同，则不会让该对象加入。如果不相同，则可以将该对象加入到HashSet中。</p>
+<ol start="2">
+<li>为什么重写equals方法时必须要重写hashCode()方法？</li>
+</ol>
+<p>两个对象相同，则它们的hashCode值也相同；如果两个对象的hashCode值相同，但这两个对象不一定相同。所以如果重写了equals()方法，没有重写hashCode()方法，则一个类的两个对象无论如何都不会相同(即使这两个对象指向相同的数据)。</p>
+<h3 id="7-final关键字总结"><a href="#7-final关键字总结" class="headerlink" title="7. final关键字总结"></a>7. final关键字总结</h3><p>final修饰的变量：final修饰的变量在定义时必须显示地赋值，并且赋值后不能再被改变。</p>
+<p>final修饰的类：final修饰的类不能被继承，并且final类中的所有成员方法都默认为final方法。</p>
+<p>final修饰的方法：final修饰的方法不能被重写。</p>
+<h3 id="8-如何防止某些字段被序列化"><a href="#8-如何防止某些字段被序列化" class="headerlink" title="8. 如何防止某些字段被序列化"></a>8. 如何防止某些字段被序列化</h3><p>Java中可以使用transient关键字来修饰变量，阻止变量被序列化和反序列化。并且transient关键字只能修饰变量，不能修饰方法和类。</p>
+<p>另外，static修饰的变量也不会被序列化（这也说明了一个类在实现Serializable接口时指定的serialVersionUID被static修饰，所以它不会被序列化，在JVM序列化对象时会自动生成一个serialVersionUID，这时就会将我们自定义的serialVersionUID赋值给自动生成的serialVersionUID）。</p>
+<h3 id="9-获取用键盘输入的两种方式"><a href="#9-获取用键盘输入的两种方式" class="headerlink" title="9. 获取用键盘输入的两种方式"></a>9. 获取用键盘输入的两种方式</h3><ol>
+<li><p>通过Scanner方法</p>
+<blockquote>
+<p>Scanner input &#x3D; new Scanner(System.in); </p>
+<p>String s &#x3D; input.nextLine();</p>
+<p>input.close();</p>
+</blockquote>
+</li>
+<li><p>通过BufferedReader方法</p>
+<blockquote>
+<p>BufferedReader input &#x3D; new BufferedReader(new InputStreamReader(System.in));</p>
+<p>String s &#x3D; input.readLine();</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="10-Java的异常处理"><a href="#10-Java的异常处理" class="headerlink" title="10. Java的异常处理"></a>10. Java的异常处理</h3><p>Exception和Error是Java异常处理的重要子类，它们都继承自同一个Throwable类。</p>
+<p><strong>Exception</strong>：程序本身可以处理的异常，通过try-catch块处理。Exception分为受检查异常(编译时异常)和不受检查异常(运行时异常)。受检查异常在编译期间必须处理，例如：FileNotFoundException、ClassNotFoundException、InterruptedException等；不受检查异常在编译期间可以不处理，例如：NullPointException、ClassCastException、ArrayIndexOutOfBoundsException等。</p>
+<p><strong>Error</strong>：程序本身无法处理的错误，JVM一般会终止线程。例如：OutOfMemoryError、StackOverFlowError</p>
+<p>以及虚拟机运行错误(VirtualMachineError)等。</p>
+<p><strong>Throwable类常用方法：</strong></p>
+<ol>
+<li><code>public String getMessage()</code>：返回异常发生时的简要描述</li>
+<li><code>public String toString()</code>：返回异常发生时的详细信息</li>
+<li><code>public String getLocalizedMessage()</code>：返回异常对象的本地化信息，若Throwable的子类覆盖了该方法，则可以生成本地化信息；若Throwable的子类没有覆盖这个方法，则返回信息和getMessage()相同。</li>
+<li><code>public void printStackTrace()</code>：在控制台上打印异常信息</li>
+</ol>
+<p><strong>try-catch-finally块：</strong></p>
+<p>try块：用于捕获异常，可以搭配0个或多个catch块，如果没有catch块，则必须跟一个finally块。</p>
+<p>catch块：用于处理捕获到的异常。</p>
+<p>finally块：无论异常是否被捕获或处理，finally块都会执行。</p>
+<p>注意：当try块或catch块中有retrurn语句时，finally语句会在方法返回之前执行；当 try 语句和 finally 语句中都有 return 语句时，在⽅法返回之前，finally 语句的内容先被执⾏，并且 finally 语句的返回值将会覆盖原始的返回值。</p>
+<p><strong>在以下3种特殊情况中，finally块不会被执行：</strong></p>
+<ol>
+<li>在try块或finally块中调用<code>System.exit()</code>退出程序，finally块不会被执行。</li>
+<li>程序所在的线程被终止</li>
+<li>关闭CPU</li>
+</ol>
+<h3 id="11-Java的IO流"><a href="#11-Java的IO流" class="headerlink" title="11. Java的IO流"></a>11. Java的IO流</h3><p><strong>Java中IO流的分类：</strong></p>
+<ol>
+<li>按流的方向分：分为输入流和输出流。</li>
+<li>按操作单元分：分为字节流和字符流。字节流用于处理音频文件、图片等；字符流用于处理文本文件。</li>
+<li>按流的角色分：分为节点流和处理流。</li>
+</ol>
+<p><strong>IO流的4个抽象基类：</strong></p>
+<ol>
+<li>InputStream：字节输入流</li>
+<li>OutputStream：字节输出流</li>
+<li>Reader：字符输入流</li>
+<li>Writer：字符输出流</li>
+</ol>
+<p> Java中IO流的 40 多个类都是从以上 4 个抽象类基类中派生出来的。</p>
+<h3 id="12-深拷贝和浅拷贝"><a href="#12-深拷贝和浅拷贝" class="headerlink" title="12.深拷贝和浅拷贝"></a>12.深拷贝和浅拷贝</h3><p><strong>浅拷贝</strong>：对于基本数据类型，拷贝的是数据值；对于引用数据类型，拷贝的是对象的引用地址，新旧对象指向的是同一个内存地址，当修改其中一个对象的值，则另一个对象的值也会改变。</p>
+<p><strong>深拷贝</strong>：对于基本数据类型，拷贝的是数据值；对于引用数据类型，则会开辟一块新的内存空间，创建一个新的对象，并复制旧对象的内容，这两个对象指向不同的内存地址，当修改其中一个对象的值，另一个对象的值不会改变。</p>
+<h3 id="13-如何实现克隆"><a href="#13-如何实现克隆" class="headerlink" title="13. 如何实现克隆"></a>13. 如何实现克隆</h3><ol>
+<li><p>实现Cloneable接口并重写Object类中的clone()方法。</p>
+</li>
+<li><p>实现Serializable接口，通过对象的序列化和反序列化实现克隆，可以实现深克隆。</p>
+</li>
+<li><p>使用第三方工具实现，比如Spring的BeanUtils类。</p>
+</li>
+</ol>
+<h3 id="14-两种单例模式"><a href="#14-两种单例模式" class="headerlink" title="14.两种单例模式"></a>14.两种单例模式</h3><p>1.饿汉式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Singleton&#123;&#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Singleton</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.懒汉式(线程安全)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Singleton</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Singleton&#123;&#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Singleton</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title function_">getInstance</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span>(Singleton.class)&#123;</span><br><span class="line">                <span class="keyword">if</span>(instance == <span class="literal">null</span>)</span><br><span class="line">                instance = <span class="keyword">new</span> <span class="title class_">Singleton</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-抽象方法是否可以被static修饰？是否可以被synchronized修饰？"><a href="#15-抽象方法是否可以被static修饰？是否可以被synchronized修饰？" class="headerlink" title="15. 抽象方法是否可以被static修饰？是否可以被synchronized修饰？"></a>15. 抽象方法是否可以被static修饰？是否可以被synchronized修饰？</h3><p>都不能，因为抽象方法需要子类重写，而static修饰的方法不能被重写只能被隐藏，所以二者矛盾；synchronized和方法的实现有关，而抽象方法不能有实现，所以二者矛盾。</p>
+<h3 id="16-String-s-x3D-new-String-“a”-new-String-“b”-创建了几个对象？"><a href="#16-String-s-x3D-new-String-“a”-new-String-“b”-创建了几个对象？" class="headerlink" title="16. String s &#x3D; new String(“a”) + new String(“b”)创建了几个对象？"></a>16. String s &#x3D; new String(“a”) + new String(“b”)创建了几个对象？</h3><p>创建了5个对象，分别为：</p>
+<p>(1) new StringBuilder()<br>(2) new String(“a”)<br>(3) 字符串常量池中的”a”<br>(4) new String(“b”)<br>(5) 字符串常量池中的”b”</p>
+<p>“+”拼接操作：首先会创建一个StringBuilder，进行拼接，最后调用toString()返回一个String对象。</p>
+<p>强调一下，toString()的调用，不会在字符串常量池中生成字符串”ab”，即拼接后的字符串不会在常量池中生成</p>
+<h3 id="17-throw和throws的区别"><a href="#17-throw和throws的区别" class="headerlink" title="17. throw和throws的区别"></a>17. throw和throws的区别</h3><ol>
+<li>throw在方法体内使用；throws在方法声明上使用</li>
+<li>throw抛出的是异常对象；throws抛出的是异常类</li>
+<li>throw只能抛出一种异常对象；throws可以抛出多个异常类并用逗号分隔开</li>
+<li>throw是手动抛出异常并且执行了throw语句一定会出现异常；throws表示了会出现异常的可能性，并不一定会出现异常</li>
+<li>throw抛出异常由方法体内的语句来处理；throws抛出异常由该方法的调用者来处理</li>
+</ol>
+<h3 id="18-Java创建对象有几种方式"><a href="#18-Java创建对象有几种方式" class="headerlink" title="18. Java创建对象有几种方式"></a>18. Java创建对象有几种方式</h3><p>Java有四种方式创建对象：</p>
+<ol>
+<li><p>使用new创建对象：<code>User u = new User();</code></p>
+</li>
+<li><p>使用反射方式创建对象：使用newInstance()方法创建。</p>
+<p><code>User u = User.class.newInstance();</code></p>
+</li>
+<li><p>使用clone创建对象：实现Cloneable接口并重写Object类的clone()方法。</p>
+</li>
+<li><p>使用反序列化创建对象：调用ObjectInputStream类的readObject()方法。</p>
+</li>
+</ol>
+
+  </div>
+  
+    
+      <a id="older" class="blog-nav" href="/2023/01/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87/">OLDER&nbsp;&gt;</a>
+      
+        
+          <a id="newer" class="blog-nav" href="/2023/01/11/%E9%9B%86%E5%90%88%E7%AF%87/">&lt;&nbsp;NEWER</a>
+          
+            
+</div>
+        <div class="footer">
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Copyright © Leedom 2021</a>
+        
+    </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Theme by Leedom | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-box">
+        <div class="search-title">
+          <!-- <span class="search-icon-input">
+            <a href="javascript: void(0)">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </span> -->
+          
+            <input type="text" class="search-input" id="search-input" placeholder="$ grep...">
+          
+          <span class="search-close-icon" id="search-close-icon">
+            <a href="javascript: void(0)">
+              <i class="iconfont icon-close"></i>
+            </a>
+          </span>
+        </div>
+        <div class="search-result" id="search-result"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    // inputArea.onclick = function() {
+    //   getSearchFile()
+    //   this.onclick = null
+    // }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        inputArea.focus()
+        getSearchFile()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'><span></ul>";
+      // $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'><h2>" + orig_data_title + "</h2></a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<h3 class=\"search-result-abstract\">" + match_content + "...</h3>"
+                }
+                str += "<hr></li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/leedom92/hexo-theme-leedom#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="John Doe" />
+  <meta name="description" content="" />
+  
+  
+  <title>
+    
+      多线程篇 
+      
+      
+    
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto:400,400italic,600|Roboto+Mono" rel="stylesheet">
+
+  <!-- hexo site css -->
+  
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/iconfont/iconfont.css">
+
+
+  
+
+  
+    
+<link rel="stylesheet" href="/css/post.css">
+
+  
+
+  <!-- jquery3.3.1 -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- fancybox -->
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <script async src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js"></script>
+  
+<script src="/js/fancybox.js"></script>
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <a href="/">LEEDOM</a>
+</div>
+
+
+      <p class="links">
+  
+    <a title="archives" target="" href="/archives/">
+      <i class="iconfont icon-bookmark"></i>
+    </a>
+  
+    <a title="github" target="_blank" href="https://github.com/leedom92/hexo-theme-leedom">
+      <i class="iconfont icon-github"></i>
+    </a>
+  
+    <a title="email" target="" href="">
+      <i class="iconfont icon-envelope"></i>
+    </a>
+  
+    <a title="facebook" target="" href="">
+      <i class="iconfont icon-facebooksquare"></i>
+    </a>
+  
+    <a title="twitter" target="" href="">
+      <i class="iconfont icon-twitter"></i>
+    </a>
+  
+    <a title="wechat" target="" href="">
+      <i class="iconfont icon-wechat"></i>
+    </a>
+  
+    <a title="weibo" target="" href="">
+      <i class="iconfont icon-weibo"></i>
+    </a>
+  
+    <a title="rss" target="_blank" href="/atom.xml">
+      <i class="iconfont icon-rss"></i>
+    </a>
+  
+</p>
+
+
+      <div class="main">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+<div class="post">
+  <h3 class="date">
+    Jan 11, 2023
+  </h3>
+  <h1>
+    多线程篇
+  </h1>
+  <div class="content markdown-body">
+    <h2 id="一、多线程篇"><a href="#一、多线程篇" class="headerlink" title="一、多线程篇"></a>一、多线程篇</h2><h3 id="1-进程和线程的区别"><a href="#1-进程和线程的区别" class="headerlink" title="1. 进程和线程的区别"></a>1. 进程和线程的区别</h3><p>进程是系统运行程序的基本单位，一个进程就是执行中的一个程序，因此进程是动态的。而一个进程在执行过程中可以产生多个线程，多个线程可以共享同一块内存空间和一组系统资源。</p>
+<p>进程和线程的最大区别在于：进程之间是独立的，而同一进程中的多个线程会相互影响。</p>
+<h3 id="2-线程有几种状态"><a href="#2-线程有几种状态" class="headerlink" title="2. 线程有几种状态"></a>2. 线程有几种状态</h3><p>线程共有5种状态：新建状态、就绪状态、运行状态、阻塞状态、死亡状态。</p>
+<ol>
+<li>新建状态：当使用new创建一个线程时，线程进入新建状态。</li>
+<li>就绪状态：当线程调用start()方法后，进入就绪状态。</li>
+<li>运行状态：当线程获取到CPU时间片后，进入运行状态。</li>
+<li>阻塞状态：线程在运行过程中，由于其他原因进入阻塞状态，如调用sleep,join,wait()方法或等待获取锁。</li>
+<li>死亡状态：①正常执行完run()方法②出现异常导致终止run()方法，则线程进入死亡状态。</li>
+</ol>
+<h3 id="3-创建线程的四种方式"><a href="#3-创建线程的四种方式" class="headerlink" title="3. 创建线程的四种方式"></a>3. 创建线程的四种方式</h3><ol>
+<li><p>继承Thread类并重写run()方法</p>
+</li>
+<li><p>实现Runnnable接口并重写run()方法</p>
+</li>
+<li><p>实现Callable接口并重写call()方法，并将Callable实例作为参数来创建TutureTask实例，然后将FutureTask实例作为参数来创建Thread对象，并调用start()启动线程。</p>
+<p>可以调用FutureTask的get()方法获取线程执行结束后call()的返回值。也就是说，FutureTask可以拿到异步执行任务的返回值。</p>
+<p>与前两种方式的不同在于：call()方法不仅可以有返回值还可以抛出异常。</p>
+</li>
+<li><p>通过线程池来创建线程</p>
+</li>
+</ol>
+<h3 id="4-sleep-和wait-的区别"><a href="#4-sleep-和wait-的区别" class="headerlink" title="4. sleep()和wait()的区别"></a>4. sleep()和wait()的区别</h3><ol>
+<li>sleep()方法定义在Thread类中；wait()方法定义在Obejct类中。</li>
+<li>sleep()方法是静态方法；wait()方法是非静态方法。</li>
+<li>调用sleep()方法不会释放锁；调用wait()方法会释放锁。</li>
+<li>sleep()方法超时后会自动唤醒；wait()方法需要其他线程调用此对象的notify()或notifyAll()方法才能唤醒。</li>
+<li>sleep()方法能够用于任何地方；wait()方法只能用于同步方法或同步代码块中。</li>
+</ol>
+<h3 id="5-synchronized-和-volatile-的区别"><a href="#5-synchronized-和-volatile-的区别" class="headerlink" title="5. synchronized 和 volatile 的区别"></a>5. synchronized 和 volatile 的区别</h3><ol>
+<li>volatile是轻量级的，所以volatile的性能比synchronized性能好。</li>
+<li>volatile只能修饰变量；synchronized可以修饰方法和代码块。</li>
+<li>volatile只能保证数据的可见性，不能保证数据的原子性；synchronized两者都可以保证。</li>
+<li>volatile会禁止指令重排序，主要解决变量在多个线程之间的可见性；synchronized主要解决多线程访问资源的同步性。</li>
+</ol>
+<h3 id="6-Synchronized实现原理"><a href="#6-Synchronized实现原理" class="headerlink" title="6. Synchronized实现原理"></a>6. Synchronized实现原理</h3><p>Synchronized作用：属于重量级锁，是以时间换空间的方式解决线程安全问题，它用来解决多线程访问资源的同步性问题。通过Synchronized修饰的方法或代码块能够保证任意时刻只有一个线程可以执行。Synchronized修饰的实例方法其同步监视器为对象，Synchronized修饰的静态方法其同步监视器为当前类。</p>
+<p>Synchronized底层实现：在编译前后生成了monitorenter和monitorexit两个字节码指令。当虚拟机执行到monitorenter指令时，会先获取锁，如果该锁没有被获取或者当前线程已经拥有了该锁，那么锁计数器会+1，当虚拟机执行到monitorexit指令时，锁计数器会-1，当且仅当锁计数器为0时，锁就会被释放。因此Synchronized是一种可重入锁。</p>
+<p>Synchronized优化：效率较低，所以在JDK6对锁的实现进行了优化，引入了自旋锁、锁消除、锁粗化、偏向锁等技术来减少锁操作的开销。1. 自旋锁：当线程获取锁失败时在进入阻塞状态之前会自旋等待一段时间，在这期间如果其他线程释放了锁那么就不用进入阻塞状态，避免了用户态到内核态的切换。2. 锁消除：在虚拟机运行时，对于代码上是同步的但被检测到不存在共享数据竞争的锁就会进行消除。3. 锁粗化：频繁地对同一个对象进行反复加锁和释放锁的操作会导致的性能消耗问题，引入锁粗化来扩大锁的作用范围。</p>
+<h3 id="7-为什么调用start-方法会执行run-方法，而不直接调用run-方法执行"><a href="#7-为什么调用start-方法会执行run-方法，而不直接调用run-方法执行" class="headerlink" title="7. 为什么调用start()方法会执行run()方法，而不直接调用run()方法执行"></a>7. 为什么调用start()方法会执行run()方法，而不直接调用run()方法执行</h3><p>调用start()方法会启动线程并进入到就绪状态，当获取到CPU时间片后会进入到运行状态，并执行run()方法，这是真正的多线程方式。而直接调用run()方法，会把run()方法当作main线程下的普通方法执行，并不会被某个线程执行，所以不是真正的多线程方式。</p>
+<h3 id="8-ThreadLocal的实现原理"><a href="#8-ThreadLocal的实现原理" class="headerlink" title="8. ThreadLocal的实现原理"></a>8. ThreadLocal的实现原理</h3><p>为了解决多个线程操作共享数据导致的线程安全问题，可以使用ThreadLocal类实现，它可以为每个线程提供一份该共享数据的副本，并且每个线程内的副本只能被当前线程访问，线程之间互不影响，是一种空间换时间的做法。</p>
+<p>调用ThreadLocal的get()和set()方法可以访问和修改当前线程内的副本的值。ThreadLocal内部使用ThreadLocalMap来存储数据，key是当前线程对象，是弱引用，value是存储的副本值，是强引用。</p>
+<p>因为key是弱引用，value是强引用，所以在GC垃圾回收时，key会被回收掉，而value不会被回收，可能会造成内存泄漏的问题，所以每次使用完ThreadLocal后要进行手动remove()删除。</p>
+<h3 id="9-什么是悲观锁和乐观锁"><a href="#9-什么是悲观锁和乐观锁" class="headerlink" title="9. 什么是悲观锁和乐观锁"></a>9. 什么是悲观锁和乐观锁</h3><p><strong>悲观锁：</strong>认为线程安全一定会发生，所以在访问操作数据前会上锁，线程只有获取到锁后才能访问。(时间换空间)</p>
+<p><strong>乐观锁：</strong>认为线程安全不一定发生，所以不会上锁，线程在更新数据前会先判断数据是否被其他线程修改，如果没被修改则可以更新数据，如果数据被修改则进行重试或异常。</p>
+<p>实现乐观锁的两种方法：</p>
+<p>① 版本号法：即根据版本号来判断数据是否被修改过，修改后则版本号+1。</p>
+<p>② CAS：即比较并替换，是版本号法的简化。CAS涉及到三个操作数：内存值、预期值、新值，它的原理是当且仅当内存值和预期值相同时，说明数据没有被修改，则将内存值修改为新值。</p>
+<p>乐观锁的缺点：1. 乐观锁只能保证一个共享变量的原子性，不能保证多个变量的原子性。2. 在并发情况下，多个线程反复更新一个变量而长时间不成功，会给CPU带来很大的压力。3. ABA问题，即内存值和预期值的比较逻辑不严谨，存在内存值被修改过后又和原来的值一样。</p>
+<h3 id="10-线程池的好处"><a href="#10-线程池的好处" class="headerlink" title="10. 线程池的好处"></a>10. 线程池的好处</h3><p>为了避免频繁创建和销毁线程带来的资源消耗问题，因此使用线程池可以减少资源的消耗，提高响应速度（在任务到达时不需要等待线程的创建就能立即执行），提高资源的利用率，避免资源的不足。</p>
+<h3 id="11-线程池的四种创建方式"><a href="#11-线程池的四种创建方式" class="headerlink" title="11. 线程池的四种创建方式"></a>11. 线程池的四种创建方式</h3><p>在《阿里巴巴Java开发手册》中，不建议使用Executors工具类去创建线程，而是通过ThreadPoolExecutor构造函数的方式创建线程。目的是为了能够更好地认识线程池的运行规则，并且避免资源耗尽的风险。</p>
+<ol>
+<li><p><strong>通过Executors工具类实现</strong></p>
+<ol>
+<li>FixedThreadPool：返回一个固定线程数量的线程池。当有一个新的任务提交时，若有空闲线程则会立即执行；若没有则任务会被添加到任务队列中，直到有空闲线程时则会处理任务队列中的任务。</li>
+<li>CachedThreadPool：返回一个线程数量可变的可缓存的线程池。当一个新的任务提交时，若没有空闲线程则会创建一个新的线程去执行该任务。其线程池的大小取决于JVM所能创建的最大线程数的大小。</li>
+<li>SingleThreadExecutor：返回一个只有一个线程的线程池。当有一个新的任务提交时，若没有空闲线程则会被添加到任务队列中，直到有空闲线程时则会按照先进先出的顺序执行队列中的任务。</li>
+</ol>
+</li>
+<li><p><strong>通过ThreadPoolExecutor自定义线程池</strong></p>
+<p>使用ThreadPoolExecutor构造函数自定义线程池，其中参数有：</p>
+<p>corePoolSize：核心线程数，即可以同时运行的最小线程数量。</p>
+<p>maximumPoolSize：最大线程数，即当队列中的任务达到队列容量时，当前同时运行的线程数扩大为最大线程数。</p>
+<p>keepAliveTime：非核心线程的存活时间，默认为60s后销毁。</p>
+<p>unit：存活时间单位。</p>
+<p>workQueue：任务队列，当没有空闲线程时新的任务会添加到任务队列中。</p>
+<p>threadFactory：线程工厂，用于创建新线程。</p>
+<p>handle：拒绝策略，当前可同时运行的线程数达到了最大线程数并且任务队列容量也满时，会执行拒绝策略。默认为AbortPolicy()策略即拒绝新任务的处理。</p>
+</li>
+</ol>
+<h3 id="12-线程池原理分析"><a href="#12-线程池原理分析" class="headerlink" title="12. 线程池原理分析"></a>12. 线程池原理分析</h3><p>线程池默认初始化后不会去创建线程，而是当调用executor.execute(work)提交一个任务到线程池中时，会先判断当前核心线程数是否已满，如果没满则会创建新的线程去执行，如果已满则会去判断任务队列容量是否已满，如果没满则将任务添加到任务队列中，如果已满则会将当前同时可运行的线程数扩大为最大线程数，如果此时线程池没满则会创建新的线程去执行，如果线程池已满则会按照拒绝策略去处理，默认为AbortPolicy拒绝新任务的处理。</p>
+<h3 id="13-execute-和-submit-的区别"><a href="#13-execute-和-submit-的区别" class="headerlink" title="13. execute()和 submit()的区别"></a>13. execute()和 submit()的区别</h3><p>execute()和submit()都属于线程池的方法，用于提交任务。</p>
+<ol>
+<li>execute()只能提交Runnable类型的任务；submit()可以提交Runnable类型和Callable类型的任务。</li>
+<li>execute()没有返回值，所以无法判断任务是否被执行成功；submit()有返回值，可以根据线程池返回的Future对象来判断任务是否被执行成功。</li>
+<li>execute()会直接抛出异常；submit()不会抛出异常，需要调用Future的get()方法才会抛出异常。</li>
+</ol>
+<h3 id="14-如何检测一个线程是否持有对象监视器"><a href="#14-如何检测一个线程是否持有对象监视器" class="headerlink" title="14. 如何检测一个线程是否持有对象监视器"></a>14. 如何检测一个线程是否持有对象监视器</h3><p>Thread类提供了一个holdsLock(Object obj)方法，该方法是静态方法，可以判断当前线程是否持有对象监视器，当且仅当该对象Obj的监视器被当前线程持有时才会返回true。</p>
+<h3 id="15-线程池的有几种拒绝策略"><a href="#15-线程池的有几种拒绝策略" class="headerlink" title="15. 线程池的有几种拒绝策略"></a>15. 线程池的有几种拒绝策略</h3><p>线程池有四种拒绝策略：</p>
+<ol>
+<li>AbortPolicy：丢弃任务并抛出RejectExecutionException异常。</li>
+<li>DiscardPolicy：丢弃任务不会抛异常。</li>
+<li>DiscardOldestPolicy：丢弃任务队列中最老的任务，并提交新任务。</li>
+<li>CallerRunsPolicy：由调用者(即提交任务的线程)执行该任务。</li>
+</ol>
+<p>当然，也可以根据业务需求自定义拒绝策略，只需要实现RejectedExecutionHandler接口即可。</p>
+<h3 id="16-阻塞队列的实现原理"><a href="#16-阻塞队列的实现原理" class="headerlink" title="16. 阻塞队列的实现原理"></a>16. 阻塞队列的实现原理</h3><p>阻塞队列(BlockingQueue)用于生产者和消费者的场景，生产者是向阻塞队列中添加数据的线程，消费者是向阻塞队列中获取数据的线程。阻塞队列的一个特性：当生产者向阻塞队列中添加数据时，如果阻塞队列已满，则该生产者线程会进入阻塞状态。当消费者向阻塞队列中获取数据时，如果阻塞队列为空，则该消费者线程会进入阻塞状态，所以阻塞队列可以很好地控制线程之间的通信。</p>
+<p>常见的阻塞队列：</p>
+<p>ArrayBlockingQueue 数组结构的有界阻塞队列</p>
+<p>LinkedBlockingQueue 链表结构的有界阻塞队列，默认长度是Integer.MAX_VALUE。</p>
+<p>PriorityBlockingQueue 支持优先级排序的无界阻塞队列</p>
+<table>
+<thead>
+<tr>
+<th align="left">处理方式</th>
+<th align="left">抛出异常</th>
+<th align="left">返回特殊值</th>
+<th align="left">一直阻塞</th>
+<th align="left">超时退出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">插入操作</td>
+<td align="left">add(e)</td>
+<td align="left">offer(e)</td>
+<td align="left">put(e)</td>
+<td align="left">offer(e, time, unit)</td>
+</tr>
+<tr>
+<td align="left">移除操作</td>
+<td align="left">remove()</td>
+<td align="left">poll()</td>
+<td align="left">take()</td>
+<td align="left">poll(time, unit)</td>
+</tr>
+<tr>
+<td align="left">获取操作</td>
+<td align="left">element()</td>
+<td align="left">peek()</td>
+<td align="left">不可用</td>
+<td align="left">不可用</td>
+</tr>
+</tbody></table>
+
+  </div>
+  
+    
+      <a id="older" class="blog-nav" href="/2023/01/11/MySQL%E7%AF%87/">OLDER&nbsp;&gt;</a>
+      
+        
+          <a id="newer" class="blog-nav" href="/2023/01/11/%E5%9F%BA%E7%A1%80%E7%AF%87/">&lt;&nbsp;NEWER</a>
+          
+            
+</div>
+        <div class="footer">
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Copyright © Leedom 2021</a>
+        
+    </div>
+  
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/leedom92/hexo-theme-leedom">Theme by Leedom | Powered by Hexo</a>
+        
+    </div>
+  
+</div>
+
+      </div>
+
+      <div class="back-to-top hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+      
+  <div class="search-icon" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-box">
+        <div class="search-title">
+          <!-- <span class="search-icon-input">
+            <a href="javascript: void(0)">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </span> -->
+          
+            <input type="text" class="search-input" id="search-input" placeholder="$ grep...">
+          
+          <span class="search-close-icon" id="search-close-icon">
+            <a href="javascript: void(0)">
+              <i class="iconfont icon-close"></i>
+            </a>
+          </span>
+        </div>
+        <div class="search-result" id="search-result"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    // inputArea.onclick = function() {
+    //   getSearchFile()
+    //   this.onclick = null
+    // }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        inputArea.focus()
+        getSearchFile()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'><span></ul>";
+      // $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'><h2>" + orig_data_title + "</h2></a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<h3 class=\"search-result-abstract\">" + match_content + "...</h3>"
+                }
+                str += "<hr></li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/leedom92/hexo-theme-leedom#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+    </div>
+  </body>
+</html>

@@ -11,7 +11,9 @@
   
   <title>
     
-      Hexo
+      Tag 
+       : 多线程篇
+      
     
   </title>
 
@@ -29,10 +31,6 @@
 <link rel="stylesheet" href="/css/common.css">
 <link rel="stylesheet" href="/iconfont/iconfont.css">
 
-
-  
-    
-<link rel="stylesheet" href="/css/index.css">
 
   
 
@@ -96,94 +94,88 @@
 
 
       <div class="main">
-        <div>
-  <ul>
-    <!-- 遍历渲染文章 -->
+        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+
+<!-- last: 按年份把文章分组，当前遍历到的年份 -->
+<!-- now: 当前遍历到的文章的发布年份 -->
+
+<div class="container archives">
+  <div class="post-list">
     
-    <li>
-      <h3>Jan 11, 2023</h3>
-      <h2>
-        <a href="/2023/01/11/%E6%A1%86%E6%9E%B6%E7%AF%87/">
-          
+        <!-- 后续文章的发布年份呈现 -->
+        <div class="content-title">
+          <h2>
+            <span>2023</span>
+          </h2>
+        </div>
+      
+      <div class="post-item" title="框架篇">
+        <div class="time-m-d">01-11</div>
+        <div class="title">
+          <a href="/2023/01/11/%E6%A1%86%E6%9E%B6%E7%AF%87/">
             
               <span>框架篇</span>
             
-          
-        </a>
-      </h2>
-    </li>
+          </a>
+        </div>
+      </div>
     
-    <li>
-      <h3>Jan 11, 2023</h3>
-      <h2>
-        <a href="/2023/01/11/%E9%9B%86%E5%90%88%E7%AF%87/">
-          
+      <div class="post-item" title="集合篇">
+        <div class="time-m-d">01-11</div>
+        <div class="title">
+          <a href="/2023/01/11/%E9%9B%86%E5%90%88%E7%AF%87/">
             
               <span>集合篇</span>
             
-          
-        </a>
-      </h2>
-    </li>
+          </a>
+        </div>
+      </div>
     
-    <li>
-      <h3>Jan 11, 2023</h3>
-      <h2>
-        <a href="/2023/01/11/%E5%9F%BA%E7%A1%80%E7%AF%87/">
-          
+      <div class="post-item" title="基础篇">
+        <div class="time-m-d">01-11</div>
+        <div class="title">
+          <a href="/2023/01/11/%E5%9F%BA%E7%A1%80%E7%AF%87/">
             
               <span>基础篇</span>
             
-          
-        </a>
-      </h2>
-    </li>
+          </a>
+        </div>
+      </div>
     
-    <li>
-      <h3>Jan 11, 2023</h3>
-      <h2>
-        <a href="/2023/01/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87/">
-          
+      <div class="post-item" title="多线程篇">
+        <div class="time-m-d">01-11</div>
+        <div class="title">
+          <a href="/2023/01/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87/">
             
               <span>多线程篇</span>
             
-          
-        </a>
-      </h2>
-    </li>
+          </a>
+        </div>
+      </div>
     
-    <li>
-      <h3>Jan 11, 2023</h3>
-      <h2>
-        <a href="/2023/01/11/MySQL%E7%AF%87/">
-          
+      <div class="post-item" title="MySQL篇">
+        <div class="time-m-d">01-11</div>
+        <div class="title">
+          <a href="/2023/01/11/MySQL%E7%AF%87/">
             
               <span>MySQL篇</span>
             
-          
-        </a>
-      </h2>
-    </li>
+          </a>
+        </div>
+      </div>
     
-    <li>
-      <h3>Jan 10, 2023</h3>
-      <h2>
-        <a href="/2023/01/10/hello-world/">
-          
+      <div class="post-item" title="Hello World">
+        <div class="time-m-d">01-10</div>
+        <div class="title">
+          <a href="/2023/01/10/hello-world/">
             
               <span>Hello World</span>
             
-          
-        </a>
-      </h2>
-    </li>
+          </a>
+        </div>
+      </div>
     
-  </ul>
-  
-  <nav class="post-navigation">
-    
-    
-  </nav>
+  </div>
 </div>
 
         <div class="footer">

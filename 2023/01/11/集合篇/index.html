@@ -11,7 +11,7 @@
   
   <title>
     
-      Hello World 
+      集合篇 
       
       
     
@@ -115,31 +115,61 @@
 
 <div class="post">
   <h3 class="date">
-    Jan 10, 2023
+    Jan 11, 2023
   </h3>
   <h1>
-    Hello World
+    集合篇
   </h1>
   <div class="content markdown-body">
-    <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <h2 id="一、集合篇"><a href="#一、集合篇" class="headerlink" title="一、集合篇"></a>一、集合篇</h2><h3 id="1-集合和数组的区别"><a href="#1-集合和数组的区别" class="headerlink" title="1. 集合和数组的区别"></a>1. 集合和数组的区别</h3><ol>
+<li>数组是固定长度的；集合是可变长度的。</li>
+<li>数组可以存储基本数据类型，也可以存储引用数据类型；集合只能存储引用数据类型。</li>
+<li>数组中的元素必须是同一种数据类型；集合中的元素可以是不同数据类型。</li>
+</ol>
+<h3 id="2-List、Set、Map的区别"><a href="#2-List、Set、Map的区别" class="headerlink" title="2. List、Set、Map的区别"></a>2. List、Set、Map的区别</h3><p>List：存储的元素是有序的，可重复的</p>
+<p>Set：存储的元素是无序的，不重复的</p>
+<p>Map：以键值对的形式存储，key是无序的不可重复的，value是无序的可重复的</p>
+<h3 id="3-ArrayList和LinkedList的区别"><a href="#3-ArrayList和LinkedList的区别" class="headerlink" title="3. ArrayList和LinkedList的区别"></a>3. ArrayList和LinkedList的区别</h3><p><strong>线程安全性：</strong>ArrayList和LinkedList都是线程不安全的。</p>
+<p><strong>数据结构：</strong>ArrayList底层使用的是对象数组存储数据的；LinkedList底层使用的是双向链表。</p>
+<p><strong>内存空间：</strong>LinkedList比ArrayList占用更多的内存，因为LinkedList中每个数据要存放其直接前驱和直接后继。</p>
+<p><strong>是否支持快速随机访问：</strong>ArrayList支持快速随机访问；LinkedList不支持快速随机访问，链表需要遍历到指定位置才能访问。</p>
+<p><strong>应用场景：</strong>对于频繁访问元素的情况可以使用ArrayList；对于频繁添加删除元素的情况使用LinkedList。</p>
+<h3 id="4-ArrayList的扩容机制"><a href="#4-ArrayList的扩容机制" class="headerlink" title="4. ArrayList的扩容机制"></a>4. ArrayList的扩容机制</h3><p>在JDK1.8中，通过无参构造方法创建ArrayList，此时是一个空数组，当真正进行添加元素操作时才会为数组分配内存，默认数组容量为10。之后添加元素时，会先判断数组容量是否满足，如果不满足，则会进行扩容，容量扩容为原来的1.5倍。</p>
+<h3 id="5-HashSet如何检查重复"><a href="#5-HashSet如何检查重复" class="headerlink" title="5. HashSet如何检查重复"></a>5. HashSet如何检查重复</h3><p>当把一个对象加入到HashSet()时，会先根据对象的hashCode值计算对象加入的位置，同时会与HashSet中其他已加入对象的hashCode值进行比较，如果不相同，则说明对象没有重复出现；如果有hashCode值相同的对象，则会调用equals()方法来判断hashCode值相同的对象是否真的相同，如果相同，则说明两个对象相同，则不会让该对象加入。如果不相同，则可以将该对象加入到HashSet中。</p>
+<h3 id="6-HashSet、LinkedHashSet-和-TreeSet-三者的异同"><a href="#6-HashSet、LinkedHashSet-和-TreeSet-三者的异同" class="headerlink" title="6. HashSet、LinkedHashSet 和 TreeSet 三者的异同"></a>6. HashSet、LinkedHashSet 和 TreeSet 三者的异同</h3><ol>
+<li>HashSet：元素是无序的，底层使用HashMap存储元素，HashSet的值作为HashMap的key存储在HashMap中，是线程不安全的，并且集合中的元素可以有一个null。</li>
+<li>LinkedHashSet：按照元素的添加顺序来访问元素，底层使用hash表+双向链表存储元素，是线程不安全的，并且集合中的元素可以有一个null。</li>
+<li>TreeSet：按照元素的添加顺序来访问元素，底层使用红黑树存储元素，是线程不安全的，并且不能有null。排序的方式有自然排序和定制排序，自然排序使用compareTo(Object obj)方法来比较元素的大小关系进行升序排序；定制排序是实现Comparator接口的compare(T o1,T o2)方法进行排序。</li>
+</ol>
+<h3 id="7-HashMap和HashTable的区别"><a href="#7-HashMap和HashTable的区别" class="headerlink" title="7. HashMap和HashTable的区别"></a>7. HashMap和HashTable的区别</h3><ol>
+<li><strong>线程安全：</strong>HashMap是线程不安全的，HashTable是线程安全的。</li>
+<li><strong>效率：</strong>HashMap的效率比HashTable要高。</li>
+<li><strong>存储null值：</strong>HashTable的key和value可以是null值，HashTable的key和value不允许null值</li>
+<li><strong>数据结构：</strong>在JDK1.8以后，HashMap采用数组+链表&#x2F;红黑树的结构，数组用来存储数据，而链表用来解决哈希冲突的问题。当链表长度大于8时，数组长度小于64时，会先进行数组的扩容，当数组长度大于64时，会将链表转化为红黑树，来提高查询速度。</li>
+<li><strong>初始容量和扩容机制：</strong>①创建时不指定初始容量，HashTable的初始容量为11，之后扩容时，将扩容为原来的2n+1；HashMap的初始容量为16，默认加载因子为0.75，当元素个数大于数组初始长度的0.75时，就会进行数组的扩容，扩容为原来的2倍，然后重新计算每个元素在数组中的位置，这个过程是十分消耗性能的。所以我们在能预知存储元素个数的情况下，创建HashMap时指定初始容量，就可以避免扩容的性能下降问题。②创建时指定初始容量，HashTable会使用我们指定的初始容量；HashMap会将容量扩容为2的幂次方。</li>
+</ol>
+<h3 id="8-ConcurrentHashMap和HashTable的区别"><a href="#8-ConcurrentHashMap和HashTable的区别" class="headerlink" title="8. ConcurrentHashMap和HashTable的区别"></a>8. ConcurrentHashMap和HashTable的区别</h3><ol>
+<li><strong>数据结构：</strong>在JDK1.7时，ConcurrentHashMap采用分段的Segment数组+HashEntry数组+链表的结构，Segment用来充当锁的角色，HashEntry数组用来存储键值对，当HashEntry中的数据进行修改时，需要先获取对应的Segment锁。在JDK1.8时，ConcurrentHashMap采用数组+链表&#x2F;红黑树的结构，不允许有null，数组用来存储数据，而链表用来解决哈希冲突的问题。当链表长度大于8时，数组长度小于64时，会先进行数组的扩容，当数组长度大于64时，会将链表转化为红黑树，来提高查询速度。</li>
+<li><strong>线程安全方式：</strong>在JDK1.7时，ConcurrentHashMap采用分段锁的方式，对整个桶数组进行了分段分割，每一把锁只能锁其中的一部分数据，多个线程访问不同数据段的数据，就不会存在锁竞争，提高了并发效率。在JDK1.8时，取消了分段锁的概念，采用Node数组+链表+红黑树的结构，使用synchronized和CAS来保证线程安全。而HashTable采用全表锁的方式来保证线程安全的，因此锁竞争激烈，效率较低。</li>
+</ol>
+<h3 id="9-HashMap的扩容机制"><a href="#9-HashMap的扩容机制" class="headerlink" title="9. HashMap的扩容机制"></a>9. HashMap的扩容机制</h3><p>创建时不指定初始容量，HashMap的初始容量为16，默认加载因子为0.75，当元素个数大于数组初始长度的0.75时，就会进行数组的扩容，扩容为原来的2倍，然后重新计算每个元素在数组中的位置，这个过程是十分消耗性能的。所以我们在能预知存储元素个数的情况下，创建HashMap时指定初始容量，就可以避免扩容的性能下降问题。</p>
+<p>例如，预知存储的元素个数为1000，那么在创建HashMap时指定初始容量为2000，HashMap会自动将容量扩容为2的幂次方也就是2048，这个时候2000*0.75&#x3D;1500&gt;1000，此时元素个数小于加载因子，HashMap就不会进行扩容，因此提高了性能。</p>
+<h3 id="10-HashMap的实现原理"><a href="#10-HashMap的实现原理" class="headerlink" title="10. HashMap的实现原理"></a>10. HashMap的实现原理</h3><p>在JDK1.8中，HashMap底层的数据结构是数组+链表&#x2F;红黑树，数组用来存储元素的，链表用来解决哈希冲突的，当链表长度大于8数组长度大于64时，链表会转化为红黑树，提高查询效率，从O(n)到O(log n)。</p>
+<p>HashMap是基于Hash算法实现的，当调用put()方法向HashMap中添加元素时，会根据key的hash值来计算元素在数组中的位置，并且会和其他key的hash值进行比较，如果出现hash值相同的key，有两种情况：①hash值相同并且key相同，则会覆盖原来的值。②hash值相同但key不同(即出现哈希冲突)，则会将当前的key-value添加到链表中，来解决哈希冲突。JDK1.8以前使用拉链法解决哈希冲突，JDK1.8使用链表转化为红黑树解决。</p>
+<h3 id="11-Comparable和Comparator接口的区别"><a href="#11-Comparable和Comparator接口的区别" class="headerlink" title="11. Comparable和Comparator接口的区别"></a>11. Comparable和Comparator接口的区别</h3><ol>
+<li><p>Comparable只包含了一个compareTo()方法，可以对两个对象进行排序，返回负数，0，正数表示输入对象小于，等于，大于已经存在的对象。</p>
+</li>
+<li><p>Comparator包含了equals()和compare()两个方法，compare()可以对输入的两个对象进行排序，返回负数，0，正数表示第一个对象小于，等于，大于第二个对象；而equals()用来判断输入参数和当前comparator的排序结果是否相同。</p>
+</li>
+</ol>
 
   </div>
   
     
+      <a id="older" class="blog-nav" href="/2023/01/11/%E5%9F%BA%E7%A1%80%E7%AF%87/">OLDER&nbsp;&gt;</a>
+      
         
-          <a id="newer" class="blog-nav" href="/2023/01/11/MySQL%E7%AF%87/">&lt;&nbsp;NEWER</a>
+          <a id="newer" class="blog-nav" href="/2023/01/11/%E6%A1%86%E6%9E%B6%E7%AF%87/">&lt;&nbsp;NEWER</a>
           
             
 </div>
