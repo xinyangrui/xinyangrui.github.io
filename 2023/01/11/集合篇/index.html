@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="一、集合篇1. 集合和数组的区别 数组是固定长度的；集合是可变长度的。 数组可以存储基本数据类型，也可以存储引用数据类型；集合只能存储引用数据类型。 数组中的元素必须是同一种数据类型；集合中的元素可以是不同数据类型。  2. List、Set、Map的区别List：存储的元素是有序的，可重复的 Set：存储的元素是无序的，不重复的 Map：以键值对的形式存储，key是无序的不可重复的，value是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集合篇">
+<meta property="og:url" content="http://example.com/2023/01/11/%E9%9B%86%E5%90%88%E7%AF%87/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、集合篇1. 集合和数组的区别 数组是固定长度的；集合是可变长度的。 数组可以存储基本数据类型，也可以存储引用数据类型；集合只能存储引用数据类型。 数组中的元素必须是同一种数据类型；集合中的元素可以是不同数据类型。  2. List、Set、Map的区别List：存储的元素是有序的，可重复的 Set：存储的元素是无序的，不重复的 Map：以键值对的形式存储，key是无序的不可重复的，value是">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-01-10T16:40:22.000Z">
+<meta property="article:modified_time" content="2023-01-10T16:41:21.679Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Java集合篇">
+<meta name="twitter:card" content="summary">
+
+
+<title >集合篇</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=1.2.14' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=1.2.14' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+
+    
+
+    
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"John Doe","root":"/","typed_text":null,"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)Hey! Good again!","hideText":"(●—●)Oh, crash!"},"theme_version":"1.2.14","theme":{"switch":true,"default":"style-light"},"search":{"enable":false,"type":"engine","href":"https://www.google.com/search?q=site:","domain":null},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_button":"Copy","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode"},"creative_commons":{"license":"by-nc-sa","language":"deed.zh","post":false,"clipboard":false},"swup":false,"plugin":{"flickr_justified_gallery":{"js":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"fancybox":{"css":"https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css","js":"https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"}},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h"}};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=1.2.14" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style=" position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+			<a href="/" class="trm-logo-frame trm-anima-link">
+				
+					<img alt="logo" src="/img/favicon.svg">
+				
+				
+					<div class="trm-logo-text">
+						Async<span>Theme</span>
+					</div>
+				
+			</a>
+			<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+
+			<!-- menu -->
+			<div class="trm-menu">
+				<nav>
+					<ul>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/" target="">
+								Home
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/archives/" target="">
+								Archives
+							</a>
+							
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+			<!-- menu end -->
+			
+			<!-- mode switcher place -->
+			
+			<div class="trm-mode-switcher-place">
+				<!-- <div class="trm-hidden-switcher"> -->
+					<div class="trm-mode-switcher">
+					  <i class="iconfont far fa-sun"></i>
+					  <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+					  <label class="trm-swich" for="trm-swich"></label>
+					  <i class="iconfont far fa-moon"></i>
+					</div>
+				  <!-- </div> -->
+			</div>
+			
+			<!-- mode switcher place end -->
+
+			 
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            集合篇
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        ThemeAsync
+    </h5>
+    
+</div>
+<!-- card header end -->
+
+<!-- sidebar social -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+
+<!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Residence:
+            </div>
+            <div class="trm-label trm-label-light">
+                Mars
+            </div>
+        </li>
+    
+</ul>
+
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            01/11
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            00:40
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            John Doe
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h2 id="一、集合篇"><a href="#一、集合篇" class="headerlink" title="一、集合篇"></a>一、集合篇</h2><h3 id="1-集合和数组的区别"><a href="#1-集合和数组的区别" class="headerlink" title="1. 集合和数组的区别"></a>1. 集合和数组的区别</h3><ol>
+<li>数组是固定长度的；集合是可变长度的。</li>
+<li>数组可以存储基本数据类型，也可以存储引用数据类型；集合只能存储引用数据类型。</li>
+<li>数组中的元素必须是同一种数据类型；集合中的元素可以是不同数据类型。</li>
+</ol>
+<h3 id="2-List、Set、Map的区别"><a href="#2-List、Set、Map的区别" class="headerlink" title="2. List、Set、Map的区别"></a>2. List、Set、Map的区别</h3><p>List：存储的元素是有序的，可重复的</p>
+<p>Set：存储的元素是无序的，不重复的</p>
+<p>Map：以键值对的形式存储，key是无序的不可重复的，value是无序的可重复的</p>
+<h3 id="3-ArrayList和LinkedList的区别"><a href="#3-ArrayList和LinkedList的区别" class="headerlink" title="3. ArrayList和LinkedList的区别"></a>3. ArrayList和LinkedList的区别</h3><p><strong>线程安全性：</strong>ArrayList和LinkedList都是线程不安全的。</p>
+<p><strong>数据结构：</strong>ArrayList底层使用的是对象数组存储数据的；LinkedList底层使用的是双向链表。</p>
+<p><strong>内存空间：</strong>LinkedList比ArrayList占用更多的内存，因为LinkedList中每个数据要存放其直接前驱和直接后继。</p>
+<p><strong>是否支持快速随机访问：</strong>ArrayList支持快速随机访问；LinkedList不支持快速随机访问，链表需要遍历到指定位置才能访问。</p>
+<p><strong>应用场景：</strong>对于频繁访问元素的情况可以使用ArrayList；对于频繁添加删除元素的情况使用LinkedList。</p>
+<h3 id="4-ArrayList的扩容机制"><a href="#4-ArrayList的扩容机制" class="headerlink" title="4. ArrayList的扩容机制"></a>4. ArrayList的扩容机制</h3><p>在JDK1.8中，通过无参构造方法创建ArrayList，此时是一个空数组，当真正进行添加元素操作时才会为数组分配内存，默认数组容量为10。之后添加元素时，会先判断数组容量是否满足，如果不满足，则会进行扩容，容量扩容为原来的1.5倍。</p>
+<h3 id="5-HashSet如何检查重复"><a href="#5-HashSet如何检查重复" class="headerlink" title="5. HashSet如何检查重复"></a>5. HashSet如何检查重复</h3><p>当把一个对象加入到HashSet()时，会先根据对象的hashCode值计算对象加入的位置，同时会与HashSet中其他已加入对象的hashCode值进行比较，如果不相同，则说明对象没有重复出现；如果有hashCode值相同的对象，则会调用equals()方法来判断hashCode值相同的对象是否真的相同，如果相同，则说明两个对象相同，则不会让该对象加入。如果不相同，则可以将该对象加入到HashSet中。</p>
+<h3 id="6-HashSet、LinkedHashSet-和-TreeSet-三者的异同"><a href="#6-HashSet、LinkedHashSet-和-TreeSet-三者的异同" class="headerlink" title="6. HashSet、LinkedHashSet 和 TreeSet 三者的异同"></a>6. HashSet、LinkedHashSet 和 TreeSet 三者的异同</h3><ol>
+<li>HashSet：元素是无序的，底层使用HashMap存储元素，HashSet的值作为HashMap的key存储在HashMap中，是线程不安全的，并且集合中的元素可以有一个null。</li>
+<li>LinkedHashSet：按照元素的添加顺序来访问元素，底层使用hash表+双向链表存储元素，是线程不安全的，并且集合中的元素可以有一个null。</li>
+<li>TreeSet：按照元素的添加顺序来访问元素，底层使用红黑树存储元素，是线程不安全的，并且不能有null。排序的方式有自然排序和定制排序，自然排序使用compareTo(Object obj)方法来比较元素的大小关系进行升序排序；定制排序是实现Comparator接口的compare(T o1,T o2)方法进行排序。</li>
+</ol>
+<h3 id="7-HashMap和HashTable的区别"><a href="#7-HashMap和HashTable的区别" class="headerlink" title="7. HashMap和HashTable的区别"></a>7. HashMap和HashTable的区别</h3><ol>
+<li><strong>线程安全：</strong>HashMap是线程不安全的，HashTable是线程安全的。</li>
+<li><strong>效率：</strong>HashMap的效率比HashTable要高。</li>
+<li><strong>存储null值：</strong>HashTable的key和value可以是null值，HashTable的key和value不允许null值</li>
+<li><strong>数据结构：</strong>在JDK1.8以后，HashMap采用数组+链表&#x2F;红黑树的结构，数组用来存储数据，而链表用来解决哈希冲突的问题。当链表长度大于8时，数组长度小于64时，会先进行数组的扩容，当数组长度大于64时，会将链表转化为红黑树，来提高查询速度。</li>
+<li><strong>初始容量和扩容机制：</strong>①创建时不指定初始容量，HashTable的初始容量为11，之后扩容时，将扩容为原来的2n+1；HashMap的初始容量为16，默认加载因子为0.75，当元素个数大于数组初始长度的0.75时，就会进行数组的扩容，扩容为原来的2倍，然后重新计算每个元素在数组中的位置，这个过程是十分消耗性能的。所以我们在能预知存储元素个数的情况下，创建HashMap时指定初始容量，就可以避免扩容的性能下降问题。②创建时指定初始容量，HashTable会使用我们指定的初始容量；HashMap会将容量扩容为2的幂次方。</li>
+</ol>
+<h3 id="8-ConcurrentHashMap和HashTable的区别"><a href="#8-ConcurrentHashMap和HashTable的区别" class="headerlink" title="8. ConcurrentHashMap和HashTable的区别"></a>8. ConcurrentHashMap和HashTable的区别</h3><ol>
+<li><strong>数据结构：</strong>在JDK1.7时，ConcurrentHashMap采用分段的Segment数组+HashEntry数组+链表的结构，Segment用来充当锁的角色，HashEntry数组用来存储键值对，当HashEntry中的数据进行修改时，需要先获取对应的Segment锁。在JDK1.8时，ConcurrentHashMap采用数组+链表&#x2F;红黑树的结构，不允许有null，数组用来存储数据，而链表用来解决哈希冲突的问题。当链表长度大于8时，数组长度小于64时，会先进行数组的扩容，当数组长度大于64时，会将链表转化为红黑树，来提高查询速度。</li>
+<li><strong>线程安全方式：</strong>在JDK1.7时，ConcurrentHashMap采用分段锁的方式，对整个桶数组进行了分段分割，每一把锁只能锁其中的一部分数据，多个线程访问不同数据段的数据，就不会存在锁竞争，提高了并发效率。在JDK1.8时，取消了分段锁的概念，采用Node数组+链表+红黑树的结构，使用synchronized和CAS来保证线程安全。而HashTable采用全表锁的方式来保证线程安全的，因此锁竞争激烈，效率较低。</li>
+</ol>
+<h3 id="9-HashMap的扩容机制"><a href="#9-HashMap的扩容机制" class="headerlink" title="9. HashMap的扩容机制"></a>9. HashMap的扩容机制</h3><p>创建时不指定初始容量，HashMap的初始容量为16，默认加载因子为0.75，当元素个数大于数组初始长度的0.75时，就会进行数组的扩容，扩容为原来的2倍，然后重新计算每个元素在数组中的位置，这个过程是十分消耗性能的。所以我们在能预知存储元素个数的情况下，创建HashMap时指定初始容量，就可以避免扩容的性能下降问题。</p>
+<p>例如，预知存储的元素个数为1000，那么在创建HashMap时指定初始容量为2000，HashMap会自动将容量扩容为2的幂次方也就是2048，这个时候2000*0.75&#x3D;1500&gt;1000，此时元素个数小于加载因子，HashMap就不会进行扩容，因此提高了性能。</p>
+<h3 id="10-HashMap的实现原理"><a href="#10-HashMap的实现原理" class="headerlink" title="10. HashMap的实现原理"></a>10. HashMap的实现原理</h3><p>在JDK1.8中，HashMap底层的数据结构是数组+链表&#x2F;红黑树，数组用来存储元素的，链表用来解决哈希冲突的，当链表长度大于8数组长度大于64时，链表会转化为红黑树，提高查询效率，从O(n)到O(log n)。</p>
+<p>HashMap是基于Hash算法实现的，当调用put()方法向HashMap中添加元素时，会根据key的hash值来计算元素在数组中的位置，并且会和其他key的hash值进行比较，如果出现hash值相同的key，有两种情况：①hash值相同并且key相同，则会覆盖原来的值。②hash值相同但key不同(即出现哈希冲突)，则会将当前的key-value添加到链表中，来解决哈希冲突。JDK1.8以前使用拉链法解决哈希冲突，JDK1.8使用链表转化为红黑树解决。</p>
+<h3 id="11-Comparable和Comparator接口的区别"><a href="#11-Comparable和Comparator接口的区别" class="headerlink" title="11. Comparable和Comparator接口的区别"></a>11. Comparable和Comparator接口的区别</h3><ol>
+<li><p>Comparable只包含了一个compareTo()方法，可以对两个对象进行排序，返回负数，0，正数表示输入对象小于，等于，大于已经存在的对象。</p>
+</li>
+<li><p>Comparator包含了equals()和compare()两个方法，compare()可以对输入的两个对象进行排序，返回负数，0，正数表示第一个对象小于，等于，大于第二个对象；而equals()用来判断输入参数和当前comparator的排序结果是否相同。</p>
+</li>
+</ol>
+
+</article>
+    
+    
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+            <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+    <a href="/2023/01/11/%E6%A1%86%E6%9E%B6%E7%AF%87/" class="trm-cover-frame trm-anima-link">
+        
+        
+            <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+        
+    </a>
+    <div class="trm-card-descr">
+        <div class="trm-label trm-category trm-mb-20">
+            <a href=" #.">
+                Unclassified
+            </a>
+        </div>
+        <h5>
+            <a href="/2023/01/11/%E6%A1%86%E6%9E%B6%E7%AF%87/" class="trm-anima-link">
+                框架篇
+            </a>
+        </h5>
+        <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+        <ul class="trm-card-data trm-label">
+            <li>23/01/11</li>
+            <li>00:40</li>
+            
+            
+        </ul>
+    </div>
+</div>
+        </div>
+    
+    
+        <div class="col-lg-6">
+            <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+    <a href="/2023/01/11/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="trm-cover-frame trm-anima-link">
+        
+        
+            <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+        
+    </a>
+    <div class="trm-card-descr">
+        <div class="trm-label trm-category trm-mb-20">
+            <a href=" #.">
+                Unclassified
+            </a>
+        </div>
+        <h5>
+            <a href="/2023/01/11/%E5%9F%BA%E7%A1%80%E7%AF%87/" class="trm-anima-link">
+                基础篇
+            </a>
+        </h5>
+        <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+        <ul class="trm-card-data trm-label">
+            <li>23/01/11</li>
+            <li>00:40</li>
+            
+            
+        </ul>
+    </div>
+</div>
+        </div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                Theme - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v1.2.14
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <!-- body -->
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+</div>
+            <!-- body end -->
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  <div id="trm-back-top" class="trm-back-top" data-title="Back To Top">
+    <i class="iconfont fas fa-arrow-up"></i>
+</div>
+  
+  <!-- Plugin -->
+
+
+
+    
+    
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+
+    
+
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+
+    <!-- 评论插件 -->
+    
+        
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=1.2.14"></script>
+
+</body>
+
+</html>

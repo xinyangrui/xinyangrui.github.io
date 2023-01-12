@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="一、MySQL篇1. MySQL存储引擎show engines;查看所有的存储引擎。show variables like &#39;%storage_engine%&#39;查看默认存储引擎。 在5.5版本之前，MySQL默认的存储引擎是MyISAM，在5.5之后，MySQL默认的存储引擎是InnoDB。 InnoDB和MyISAM的区别：  是否支持行级锁：MyISAM只支持表级锁；Inno">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL篇">
+<meta property="og:url" content="http://example.com/2023/01/11/MySQL%E7%AF%87/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、MySQL篇1. MySQL存储引擎show engines;查看所有的存储引擎。show variables like &#39;%storage_engine%&#39;查看默认存储引擎。 在5.5版本之前，MySQL默认的存储引擎是MyISAM，在5.5之后，MySQL默认的存储引擎是InnoDB。 InnoDB和MyISAM的区别：  是否支持行级锁：MyISAM只支持表级锁；Inno">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-01-10T16:37:35.000Z">
+<meta property="article:modified_time" content="2023-01-10T16:38:06.425Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="MySQL篇">
+<meta name="twitter:card" content="summary">
+
+
+<title >MySQL篇</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=1.2.14' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=1.2.14' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+
+    
+
+    
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"John Doe","root":"/","typed_text":null,"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)Hey! Good again!","hideText":"(●—●)Oh, crash!"},"theme_version":"1.2.14","theme":{"switch":true,"default":"style-light"},"search":{"enable":false,"type":"engine","href":"https://www.google.com/search?q=site:","domain":null},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms","author":"Post author: ","copyright_link":"Post link: ","copyright_license_title":"Copyright Notice: ","copyright_license_content":"All articles in this blog are licensed under undefined unless otherwise stated.","copy_button":"Copy","copy_success":"Copied","copy_failure":"Copy failed","open_read_mode":"Enter reading mode","exit_read_mode":"Exit reading mode"},"creative_commons":{"license":"by-nc-sa","language":"deed.zh","post":false,"clipboard":false},"swup":false,"plugin":{"flickr_justified_gallery":{"js":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"fancybox":{"css":"https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css","js":"https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"}},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h"}};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=1.2.14" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style=" position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+			<a href="/" class="trm-logo-frame trm-anima-link">
+				
+					<img alt="logo" src="/img/favicon.svg">
+				
+				
+					<div class="trm-logo-text">
+						Async<span>Theme</span>
+					</div>
+				
+			</a>
+			<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+
+			<!-- menu -->
+			<div class="trm-menu">
+				<nav>
+					<ul>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/" target="">
+								Home
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/archives/" target="">
+								Archives
+							</a>
+							
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+			<!-- menu end -->
+			
+			<!-- mode switcher place -->
+			
+			<div class="trm-mode-switcher-place">
+				<!-- <div class="trm-hidden-switcher"> -->
+					<div class="trm-mode-switcher">
+					  <i class="iconfont far fa-sun"></i>
+					  <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+					  <label class="trm-swich" for="trm-swich"></label>
+					  <i class="iconfont far fa-moon"></i>
+					</div>
+				  <!-- </div> -->
+			</div>
+			
+			<!-- mode switcher place end -->
+
+			 
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            MySQL篇
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        ThemeAsync
+    </h5>
+    
+</div>
+<!-- card header end -->
+
+<!-- sidebar social -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+
+<!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Residence:
+            </div>
+            <div class="trm-label trm-label-light">
+                Mars
+            </div>
+        </li>
+    
+</ul>
+
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            01/11
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            00:37
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            John Doe
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h2 id="一、MySQL篇"><a href="#一、MySQL篇" class="headerlink" title="一、MySQL篇"></a>一、MySQL篇</h2><h3 id="1-MySQL存储引擎"><a href="#1-MySQL存储引擎" class="headerlink" title="1. MySQL存储引擎"></a>1. MySQL存储引擎</h3><p><code>show engines;</code>查看所有的存储引擎。<code>show variables like &#39;%storage_engine%&#39;</code>查看默认存储引擎。</p>
+<p>在5.5版本之前，MySQL默认的存储引擎是MyISAM，在5.5之后，MySQL默认的存储引擎是InnoDB。</p>
+<p><strong>InnoDB和MyISAM的区别：</strong></p>
+<ol>
+<li>是否支持行级锁：MyISAM只支持表级锁；InnoDB支持表级锁和行级锁，默认为行级锁。</li>
+<li>是否支持事务：MyISAM不支持事务；InnoDB是事务性存储引擎，所以支持事务和回滚。InnoDB支持外键</li>
+<li>是否支持安全恢复：MyISAM崩溃后无法安全恢复；InnoDB崩溃后能够安全恢复。</li>
+<li>是否MVCC：MyISAM不支持MVCC；InnoDB支持MVCC，应对高并发事务，MVCC能够避免加锁操作，比单纯的加锁更高效，并且MVCC只能在<code>READ COMMITED</code>和<code>REPEATABLE READ</code>两个隔离级别下使用，在快照读(普通读)的情况下可以解决幻读的问题。MVCC可以通过乐观锁和悲观锁的方式实现。</li>
+</ol>
+<h3 id="2-MySQL索引"><a href="#2-MySQL索引" class="headerlink" title="2. MySQL索引"></a>2. MySQL索引</h3><p><strong>定义：</strong>索引是一种排好序的快速查找数据结构。</p>
+<p><strong>优点：</strong>索引能够提高查询数据的速度，降低IO的成本。</p>
+<p><strong>缺点：</strong>索引会占用额外的物理空间，会降低表的增删改的效率，因为每次增删改时需要动态地维护索引。</p>
+<p><strong>创建索引的场景：</strong>①主键会自动创建唯一索引②频繁的作为查询条件的字段③查询中排序的，分组的字段。</p>
+<p><strong>不创建索引的场景：</strong>①表记录太少的字段②频繁增删改的字段③数据重复且分布均匀的字段，如性别。</p>
+<p><strong>索引的分类：</strong></p>
+<p>​	①普通索引：最基本的索引。没有任何限制，用于加速查询。</p>
+<p>​	②唯一索引：索引列的值必须唯一，可以为null，一个表可以有多个唯一索引。</p>
+<p>​	③主键索引：是一种特殊的唯一索引，不可以为null，一个表中只能有一个主键索引。</p>
+<p>​	④组合索引：包含多个列的索引，使用组合索引要遵循最左前缀原则。</p>
+<p>​	⑤全文索引：用于查找全文的关键字。只能为char,varchar,text列创建，经常和match against操作搭配使用。</p>
+<p><strong>索引的相关语句：</strong></p>
+<p>​	①创建索引：<code>CREATE INDEX indexName ON mytable(column_name);</code></p>
+<p>​	②添加索引：<code>ALTER TABLE mytable ADD INDEX indexName(column_name);</code></p>
+<p>​	③查看索引：<code>SHOW INDEX FROM mytable;</code></p>
+<p>​	④删除索引：<code>DROP INDEX indexName ON mytable;</code></p>
+<p><strong>索引优化：</strong></p>
+<p>​	①遵循最左前缀原则，即使用组合索引，查询时从索引的最左前列开始并且不跳过索引中间的列。</p>
+<p>​	②不在索引列上做计算，函数和类型转换的操作。</p>
+<p>​	③存储引擎不能使用索引列中范围条件右边的列(范围条件右边的列全失效)</p>
+<p>​	④尽量使用覆盖索引(索引列和查询列一致)，减少select *</p>
+<p>​	⑤使用!&#x3D;或&lt;&gt;时会导致索引失效而转向全表扫描</p>
+<p>​	⑥使用is null,is not null会导致索引失效</p>
+<p>​	⑦使用like以通配符’%abc’开头时会导致索引失效而转向全表扫描</p>
+<p>​	⑧查询条件的字段是字符串并且不加单引号，索引会失效</p>
+<p>​	⑨少用or，否则索引会失效</p>
+<h3 id="3-MySQL事务"><a href="#3-MySQL事务" class="headerlink" title="3. MySQL事务"></a>3. MySQL事务</h3><p><strong>概念：</strong>事务是逻辑上的一组操作，要么都成功，要么都不成功。</p>
+<p><strong>四大特性：</strong></p>
+<ol>
+<li>原子性：事务是最小的执行单位，不可分割，要么都成功，要么都不成功。</li>
+<li>一致性：事务执行前后，数据都保持一致，即每个事务对同一数据的读取结果是相同的。</li>
+<li>隔离性：在并发环境下，事务之间不会相互干扰。即每个事务操作同一数据时都有自己的独立数据空间。</li>
+<li>持久性：事务提交之后，对数据库中数据的改变是永久的，即使数据库发生故障也不会受到影响。</li>
+</ol>
+<p><strong>并发事务带来的问题：</strong></p>
+<p>在并发环境下，多个事务对同一数据进行操作时，会产生以下问题：</p>
+<ol>
+<li>脏读：一个事务对数据进行了修改，在未提交到数据库之前，这时另一个事务读取了该数据，导致读取到的数据是“脏数据”，结果可能不是最终提交到数据库中的数据。</li>
+<li>不可重复读：一个事务对于同一数据的多次读取结果是不同的，在该事务多次读取之间，另一个事务对数据进行了修改，导致该事务多次读取的数据结果不一致。</li>
+<li>幻读：事务T1读取了几行数据，之后事务T2新增或删除了一些数据，事务T1再次读取时会发现多了或少了一些数据，产生幻读的问题。</li>
+</ol>
+<p><strong>事务的隔离级别：</strong></p>
+<ol>
+<li>READ-UNCOMMITTED(读取未提交)：允许读取未提交的数据，会导致脏读，不可重复读和幻读问题。</li>
+<li>READ-COMMITTED(读取已提交)：允许读取已提交的数据，可以解决脏读，会导致不可重复读和幻读。</li>
+<li>REPEATABLE-READ(可重复读)：对同一数据的多次读取结果是相同的，除非该数据被自身事务所修改。可以解决脏读和不可重复读，会导致幻读。</li>
+<li>SERIALIZABLE(可串行化)：最高的隔离级别，要求所有事务必须逐个执行，可以解决脏读，不可重复读和幻读</li>
+</ol>
+<h3 id="4-MySQL锁机制"><a href="#4-MySQL锁机制" class="headerlink" title="4. MySQL锁机制"></a>4. MySQL锁机制</h3><p><strong>按锁的粒度分类：</strong></p>
+<ol>
+<li>表级锁：锁粒度最大，对当前的整张表加锁，并且开销小，加锁速度快，不会出现死锁。但锁冲突的概率大，并发度低。</li>
+<li>行级锁：锁粒度最小，只对当前操作的行加锁，并且开销大，加锁速度慢，会出现死锁。但是大大减少了数据库操作的冲突，并发度高。行级锁按照使用方式可以分为共享锁和排他锁。</li>
+</ol>
+<p>注意：InnoDB存储引擎是基于索引来完成行锁的，锁住的是索引而不是记录。如果不通过索引条件查询数据时，那么就会对表中的所有记录加锁，相当于表锁，所以考虑性能的话，应该对WHERE条件查询的字段加上索引。</p>
+<p><strong>按锁的类型分类：</strong></p>
+<ol>
+<li><p>共享锁(S锁)：</p>
+<p>定义：也称为读锁。即一个事务对数据加上了共享锁，则其他事务想要读取该数据时只能加共享锁，不能加排他锁。并且获取到共享锁的事务只能对该数据进行读取不能修改。</p>
+<p>用法：<code>SELECT * FROM t_name WHERE ... LOCK IN SHARE MODE;</code></p>
+</li>
+<li><p>排他锁(X锁)：</p>
+<p>定义：也称为写锁。即一个事务对数据加上了排他锁，那么MySQL会对查询结果的每行都加上排他锁，则其他事务不能再加任何类型的锁，直到释放了排他锁。并且获取到排他锁的事务可以对数据进行读取和修改。</p>
+<p>用法：<code>SELECT * FROM t_name WHERE ... FOR UPDATE;</code></p>
+</li>
+</ol>
+<p>注意：对于select语句，InnoDB默认不会加任何锁。需要我们手动加锁。</p>
+<p>​			对于update、delete、insert语句，InnoDB会自动给涉及到的数据加上排他锁。</p>
+<p><strong>InnoDB存储引擎的锁算法：</strong></p>
+<ol>
+<li>Record lock：单个行记录上的锁。</li>
+<li>Gap lock：间隙锁，锁定一个范围，不包括记录本身。</li>
+<li>Next-key lock：即Gap lock+Record lock，锁定一个范围，包括记录本身。</li>
+</ol>
+<p>相关规则：</p>
+<p>① 如果不通过索引条件查询，则会对表中的所有记录加锁，相当于表锁，若考虑性能，则应对WHERE条件查询的字段都加上索引。</p>
+<p>② InnoDB使用Next-key lock来解决幻读问题，并且InnoDB只在可重复读的隔离级别下使用该机制。</p>
+<p>③ 当查询的索引是唯一索引时，会将Next-key lock降级为Record lock，即锁住当前索引本身，而不是范围。</p>
+<h3 id="5-大表优化"><a href="#5-大表优化" class="headerlink" title="5. 大表优化"></a>5. 大表优化</h3><p>当MySQL单表记录数过大时，CRUD的性能就会急剧下降，因此要进行一些优化措施：</p>
+<ol>
+<li><p><strong>限制数据的范围</strong></p>
+<p>在查询时限制数据的查询范围条件。比如说在查询用户的订单信息时，限制查询的范围在一个月内。</p>
+</li>
+<li><p><strong>读&#x2F;写分离</strong></p>
+<p>主数据库负责读数据，从数据库负责写数据，主从之间通过二进制日志文件(由主数据库产生)进行数据同步。</p>
+</li>
+<li><p><strong>垂直分区</strong></p>
+<p>根据数据库表的相关性进行拆分，即对数据库表的列进行拆分，拆分成多张表。</p>
+<p>优点：① 简化表结构，易于维护 ② 使得表中的列变少，查询时可以减少读取的数据块数，减少I&#x2F;O次数。</p>
+<p>缺点：① 主键会出现冗余，需要管理冗余列</p>
+<p>​			② 会引起表连接join操作，可以在业务层进行join减少数据库压力</p>
+<p>​			③ 事务处理更加复杂</p>
+</li>
+<li><p><strong>水平分区</strong></p>
+<p>根据某种策略将数据分片进行存储，这样每片数据会分散到不同的表或库中，达到分布式的效果，能够支持非常大的数据量，即对数据库表的记录进行拆分，拆分成多张表。</p>
+<p>优点：① 提高数据库的并发能力 ② 应用端改造减少</p>
+<p>缺点：① 分片事务的一致性难以解决 ② 跨节点join性能较差，逻辑复杂</p>
+<p>注意：分表仅仅解决了单表数据量过大的问题，表的数据还是在一台服务器上，对于提高MySQL并发能力没有太大作用，因此，要通过分库来解决。</p>
+</li>
+</ol>
+<h3 id="6-分库分表后，如何生成全局ID"><a href="#6-分库分表后，如何生成全局ID" class="headerlink" title="6. 分库分表后，如何生成全局ID"></a>6. 分库分表后，如何生成全局ID</h3><ol>
+<li><strong>UUID：</strong>使用UUID生成全局唯一ID，但是生成的ID过长，查询效率低。</li>
+<li><strong>数据库自增ID：</strong>这种方式生成的ID有序，需要独立部署数据库实例，成本较高。</li>
+<li><strong>Redis生成ID：</strong>使用Redis的自增策略increament生成全局唯一ID。</li>
+<li><strong>雪花算法生成ID：</strong>以时间戳+序列号的方式生成全局唯一ID。</li>
+<li><strong>美团的Leaf分布式ID生成系统：</strong>可以保证全局唯一性，趋势递增，单调递增，信息安全，但需要依赖关系数据库，Zookeeper中间件实现。链接：<a target="_blank" rel="noopener" href="https://tech.meituan.com/2017/04/21/mt-leaf.html">Leaf——美团点评分布式ID生成系统 - 美团技术团队 (meituan.com)</a></li>
+</ol>
+<h3 id="7-SQL优化的20条建议"><a href="#7-SQL优化的20条建议" class="headerlink" title="7. SQL优化的20条建议"></a>7. SQL优化的20条建议</h3><ol>
+<li><p><strong>减少<code>Select *</code>查询，尽量查询具体的字段</strong></p>
+</li>
+<li><p><strong>如果预知查询结果是一条或是最大&#x2F;最小数据时，使用limit 1</strong></p>
+<p>​	a.使用limit可以限制查询的记录数，因此可以避免全表扫描，提高查询效率。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> age <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> name<span class="operator">=</span><span class="string">&#x27;jk&#x27;</span> limit <span class="number">1</span>;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>补充： limit <span class="number">1</span> 等价于 limit <span class="number">0</span>,<span class="number">1</span> 即从第<span class="number">1</span>条记录开始，限制查询<span class="number">1</span>条</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>尽量避免在WHERE中使用or来连接条件</strong></p>
+<p>​	a.使用or会导致索引失效，因此查询有索引的字段时使用union all来连接条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>在创建表时我给user_id创建了索引，age没有索引</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>在查询时若使用<span class="keyword">or</span>，则查询走到age字段时就会进行全表扫描，而mysql是有优化器的，所以此时会导致索引失效</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>总结：查询带索引的字段时，使用<span class="keyword">union</span>或<span class="keyword">union</span> <span class="keyword">all</span>来连接条件，索引不会失效。</span><br><span class="line"></span><br><span class="line">  说到这，谈一下<span class="keyword">union</span>和<span class="keyword">union</span> <span class="keyword">all</span>的区别：</span><br><span class="line">     <span class="keyword">union</span>：对查询的多个结果集进行合并，并且会去掉重复行，会进行排序。</span><br><span class="line">     <span class="keyword">union</span> <span class="keyword">all</span>：对查询的多个结果集进行合并，不会去重，也不会排序，因此效率比<span class="keyword">union</span>高。</span><br><span class="line">  注意：使用<span class="keyword">union</span><span class="operator">/</span><span class="keyword">union</span> <span class="keyword">all</span>时，要保证<span class="keyword">select</span>查询的列个数一致，列类型一致，而列名可以不同。</span><br><span class="line">  </span><br><span class="line"><span class="keyword">select</span> name <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> user_id<span class="operator">=</span><span class="number">101</span></span><br><span class="line"><span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line"><span class="keyword">select</span> name <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> age<span class="operator">&gt;</span><span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用like模糊查询时尽量避免以’%’开头</strong></p>
+<p>a.使用like通配符以%开头时，会导致索引失效</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>使用 <span class="keyword">like</span> <span class="string">&#x27;%abc&#x27;</span> 会导致索引失效；</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> name <span class="keyword">like</span> <span class="string">&#x27;%abc&#x27;</span>;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>使用 <span class="keyword">like</span> <span class="string">&#x27;abc%&#x27;</span> 索引不会失效，还是会走索引的</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> name <span class="keyword">like</span> <span class="string">&#x27;abc%&#x27;</span>;	</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>尽量避免在索引列上使用函数</strong></p>
+</li>
+<li><p><strong>尽量避免在索引列上进行计算操作</strong></p>
+</li>
+<li><p><strong>使用inner join、left join、right join时，优先使用inner join，若使用left join时，左表数据结果尽量小</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>反例</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">join</span> <span class="keyword">left</span> t2 <span class="keyword">on</span> t1.id<span class="operator">=</span>t2.id <span class="keyword">where</span> t1.id<span class="operator">&gt;</span><span class="number">3</span>;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>正例</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> (<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span> t1.id<span class="operator">&gt;</span><span class="number">3</span>) t0 <span class="keyword">join</span> <span class="keyword">left</span> t2 <span class="keyword">on</span> t0.id<span class="operator">=</span>t2.id;</span><br><span class="line"></span><br><span class="line">这里我还是再补充一下吧:</span><br><span class="line"> <span class="keyword">inner</span> <span class="keyword">join</span>：内连接，返回的是两个表中字段匹配的记录。</span><br><span class="line"> <span class="keyword">left</span> <span class="keyword">join</span>：左连接，返回左表中的所有记录，和右表中满足匹配条件的部分记录。</span><br><span class="line"> <span class="keyword">right</span> <span class="keyword">join</span>：右连接，返回右表中的所有记录，和左表中满足匹配条件的部分记录。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>尽量在WHERE中使用!&#x3D;或&lt;&gt;操作符</strong></p>
+<p>a. WHERE中使用!&#x3D;或&lt;&gt;会导致索引失效</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>反例</span><br><span class="line"><span class="keyword">select</span> id,name <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> age<span class="operator">!=</span><span class="number">20</span>;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>正例</span><br><span class="line"><span class="keyword">select</span> id,name <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> age<span class="operator">&gt;</span><span class="number">20</span></span><br><span class="line"><span class="keyword">union</span></span><br><span class="line"><span class="keyword">select</span> id,name <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> age<span class="operator">&lt;</span><span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用WHERE时限制查询数据的范围，避免返回多余的记录</strong></p>
+</li>
+<li><p><strong>使用组合索引时，注意索引列的顺序，遵循最左前缀原则</strong></p>
+<p>a.使用组合索引时，从索引列的最左前列开始查询，并且不跳过中间的列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span> 首先呢我创建了一个组合索引： <span class="keyword">create</span> index idx_userid_age <span class="keyword">on</span> <span class="keyword">user</span>(userId,age);</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>反例 此时索引失效，转为全表扫描</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> age<span class="operator">=</span><span class="number">20</span>;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>正例 遵循最左前缀原则，会按索引查询</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">user</span> <span class="keyword">where</span> userId<span class="operator">=</span><span class="number">10</span> <span class="keyword">and</span> age<span class="operator">=</span><span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>如果插入数据过多时，考虑使用批量插入</strong></p>
+</li>
+<li><p><strong>避免创建冗余和重复索引</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>反例</span><br><span class="line"><span class="keyword">create</span> index <span class="string">&#x27;idx_userid&#x27;</span> <span class="keyword">on</span> mytable(<span class="string">&#x27;userid&#x27;</span>);</span><br><span class="line"><span class="keyword">create</span> index <span class="string">&#x27;idx_userid_age&#x27;</span> <span class="keyword">on</span> mytable(<span class="string">&#x27;userid&#x27;</span>,<span class="string">&#x27;age&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>正例  组合索引(A,B)相当于创建了(A),(A,B)两个索引</span><br><span class="line"><span class="keyword">create</span> index <span class="string">&#x27;idx_userid_age&#x27;</span> <span class="keyword">on</span> mytable(<span class="string">&#x27;userid&#x27;</span>,<span class="string">&#x27;age&#x27;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查询时WHERE中避免使用is null或is not null</strong></p>
+</li>
+<li><p><strong>不要有超过5个以上的表连接</strong></p>
+</li>
+<li><p><strong>一个表的索引数一般在5个以内</strong></p>
+</li>
+<li><p><strong>尽量使用数值型字段，避免使用字符型字段</strong></p>
+<p>a. 字符型字段会降低查询和连接的性能，增加存储开销</p>
+</li>
+<li><p><strong>对于数据重复多的字段如性别，不适合建立索引</strong></p>
+</li>
+<li><p><strong>尽量使用varchar代替char存储字段，节省存储空间</strong></p>
+</li>
+<li><p><strong>查询条件是字符串类型的字段，使用单引号括起来，避免其进行隐式的类型转换导致索引失效</strong></p>
+</li>
+<li><p><strong>写SQL语句时加上explain，分析SQL语句的性能</strong></p>
+</li>
+</ol>
+
+</article>
+    
+    
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            Other Articles
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+            <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+    <a href="/2023/01/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87/" class="trm-cover-frame trm-anima-link">
+        
+        
+            <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+        
+    </a>
+    <div class="trm-card-descr">
+        <div class="trm-label trm-category trm-mb-20">
+            <a href=" #.">
+                Unclassified
+            </a>
+        </div>
+        <h5>
+            <a href="/2023/01/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87/" class="trm-anima-link">
+                多线程篇
+            </a>
+        </h5>
+        <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+        <ul class="trm-card-data trm-label">
+            <li>23/01/11</li>
+            <li>00:39</li>
+            
+            
+        </ul>
+    </div>
+</div>
+        </div>
+    
+    
+        <div class="col-lg-6">
+            <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+    <a href="/2023/01/10/hello-world/" class="trm-cover-frame trm-anima-link">
+        
+        
+            <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+        
+    </a>
+    <div class="trm-card-descr">
+        <div class="trm-label trm-category trm-mb-20">
+            <a href=" #.">
+                Unclassified
+            </a>
+        </div>
+        <h5>
+            <a href="/2023/01/10/hello-world/" class="trm-anima-link">
+                Hello World
+            </a>
+        </h5>
+        <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+        <ul class="trm-card-data trm-label">
+            <li>23/01/10</li>
+            <li>22:25</li>
+            
+            
+        </ul>
+    </div>
+</div>
+        </div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                Theme - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v1.2.14
+            </span>
+        </div>
+      
+
+     
+
+     
+</footer>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <!-- body -->
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="Read Mode" onclick="switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+</div>
+            <!-- body end -->
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  <div id="trm-back-top" class="trm-back-top" data-title="Back To Top">
+    <i class="iconfont fas fa-arrow-up"></i>
+</div>
+  
+  <!-- Plugin -->
+
+
+
+    
+    
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+
+    
+
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+
+    <!-- 评论插件 -->
+    
+        
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=1.2.14"></script>
+
+</body>
+
+</html>
