@@ -11,7 +11,9 @@
   
   <title>
     
-      Hexo
+      点评项目梳理 
+      
+      
     
   </title>
 
@@ -31,10 +33,10 @@
 
 
   
-    
-<link rel="stylesheet" href="/css/index.css">
 
   
+    
+<link rel="stylesheet" href="/css/post.css">
 
   
 
@@ -96,122 +98,58 @@
 
 
       <div class="main">
-        <div>
-  <ul>
-    <!-- 遍历渲染文章 -->
-    
-    <li>
-      <h3>Jan 13, 2023</h3>
-      <h2>
-        <a href="/2023/01/13/%E7%82%B9%E8%AF%84%E9%A1%B9%E7%9B%AE%E6%A2%B3%E7%90%86/">
-          
-            
-              <span>点评项目梳理</span>
-            
-          
-        </a>
-      </h2>
-    </li>
-    
-    <li>
-      <h3>Jan 11, 2023</h3>
-      <h2>
-        <a href="/2023/01/11/Redis%E7%AF%87/">
-          
-            
-              <span>Redis篇</span>
-            
-          
-        </a>
-      </h2>
-    </li>
-    
-    <li>
-      <h3>Jan 11, 2023</h3>
-      <h2>
-        <a href="/2023/01/11/%E6%A1%86%E6%9E%B6%E7%AF%87/">
-          
-            
-              <span>框架篇</span>
-            
-          
-        </a>
-      </h2>
-    </li>
-    
-    <li>
-      <h3>Jan 11, 2023</h3>
-      <h2>
-        <a href="/2023/01/11/%E9%9B%86%E5%90%88%E7%AF%87/">
-          
-            
-              <span>集合篇</span>
-            
-          
-        </a>
-      </h2>
-    </li>
-    
-    <li>
-      <h3>Jan 11, 2023</h3>
-      <h2>
-        <a href="/2023/01/11/%E5%9F%BA%E7%A1%80%E7%AF%87/">
-          
-            
-              <span>基础篇</span>
-            
-          
-        </a>
-      </h2>
-    </li>
-    
-    <li>
-      <h3>Jan 11, 2023</h3>
-      <h2>
-        <a href="/2023/01/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87/">
-          
-            
-              <span>多线程篇</span>
-            
-          
-        </a>
-      </h2>
-    </li>
-    
-    <li>
-      <h3>Jan 11, 2023</h3>
-      <h2>
-        <a href="/2023/01/11/MySQL%E7%AF%87/">
-          
-            
-              <span>MySQL篇</span>
-            
-          
-        </a>
-      </h2>
-    </li>
-    
-    <li>
-      <h3>Jan 10, 2023</h3>
-      <h2>
-        <a href="/2023/01/10/hello-world/">
-          
-            
-              <span>Hello World</span>
-            
-          
-        </a>
-      </h2>
-    </li>
-    
-  </ul>
-  
-  <nav class="post-navigation">
-    
-    
-  </nav>
-</div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+
+<div class="post">
+  <h3 class="date">
+    Jan 13, 2023
+  </h3>
+  <h1>
+    点评项目梳理
+  </h1>
+  <div class="content markdown-body">
+    <h2 id="一、网上点评项目"><a href="#一、网上点评项目" class="headerlink" title="一、网上点评项目"></a>一、网上点评项目</h2><h3 id="1-短信验证码登录"><a href="#1-短信验证码登录" class="headerlink" title="1. 短信验证码登录"></a>1. 短信验证码登录</h3><p><strong>问题描述：</strong></p>
+<p>在单体应用中，使用session保存用户信息，session是存在于服务器内存中的，所以没什么问题。但是在集群模式下，有多个web服务器，然后会使用Nginx作负载均衡，采用轮询的算法请求服务器。就会造成用户在A服务器登录了，信息保存在A服务器中，下次用户访问B服务器时，session中的数据不共享，导致用户需要重新登录，体验很差。所以使用Redis来保存用户信息，并且将验证码保存到Redis中，使用验证码实现用户登录功能。</p>
+<p><strong>实现思路：</strong></p>
+<p>一、进入到登录页面，输入手机号，然后点击发送验证码，可以使用阿里云的短信云API实现，然后将生成的验证码和手机号保存到Redis中，点击登录按钮，会将输入的验证码和手机号与Redis中缓存的数据进行判断，如果一致则去数据库中查询是否存在该用户，不存在则创建，存在则生成一个token，用于作登录令牌。然后将用户信息保存到Redis的hash表中，token作为Key，用户信息作为value。最后将token返回给前端，前端会将token保存到请求头中，并且添加前端拦截器，拦截器会将token添加到请求头中，每次请求时都会携带token，后端可以接收到token进行验证。</p>
+<p>二、定义两个拦截器：刷新token拦截器，登录验证拦截器</p>
+<p>刷新token拦截器：拦截所有请求。根据token判断Redis中用户是否存在，存在则将用户信息保存到ThreadLocal中，并刷新token的有效时间，最后放行。登录验证交给登录拦截器去判断处理。</p>
+<p>登录验证拦截器：拦截部分请求。判断ThreadLocal中用户是否存在，如果存在则放行，不存在则拦截。</p>
+<p>刷新token拦截器的优先级高于登录拦截器，可以通过order()方法设置，值越小优先级越高。</p>
+<h3 id="2-基于Redis实现分布式锁"><a href="#2-基于Redis实现分布式锁" class="headerlink" title="2. 基于Redis实现分布式锁"></a>2. 基于Redis实现分布式锁</h3><p><strong>问题描述：</strong>在单台服务器上，使用加锁可以解决线程安全问题。但是在集群模式下，需要使用分布式锁，因为每个JVM拥有自己的锁监视器，不同JVM的锁是不共享的。所以要使用分布式锁保证多进程之间可见并互斥。</p>
+<p><strong>实现思路：</strong>使用Redis提供的setnx命令能够实现互斥，并且不同服务器共享同一个Redis，Redis的key是唯一的，所以Redis的锁是被共享的。这里对于锁Key的设置，使用业务名作为Key，线程ID作为value，当执行秒杀下单功能时，保证只有一个线程获取到锁，执行完后释放锁。</p>
+<p><strong>锁误删问题解决：</strong>使用UUID+线程ID作为锁的value，这里使用UUID的原因是不同服务器之间的线程ID可能会相同，都是采用ID递增策略，所以使用UUID保证不同服务器之间的多个线程ID是唯一的，然后在释放锁前进行判断，判断当前线程是否为锁value对应的线程，是则释放锁，否则不能释放。</p>
+<p><strong>锁的原子性问题：</strong>使用Lua脚本可以保证多条命令的原子性。在Lua脚本中编写释放锁的命令，然后在代码中定义Lua脚本初始化对象DefaultRedisScript用于加载Lua脚本，然后在释放锁方法中通过RedisTemplate的execute()方法执行Lua脚本。保证锁释放的原子性。</p>
+<h3 id="3-基于Redis实现异步秒杀下单"><a href="#3-基于Redis实现异步秒杀下单" class="headerlink" title="3. 基于Redis实现异步秒杀下单"></a>3. 基于Redis实现异步秒杀下单</h3><p>使用Stream类型的消息队列，并使用消费者组，将多个消费者划分到一个组中，监听同一个队列。</p>
+<p>Stream消费者组的优点：</p>
+<p>① 消息分流：可以将队列中的消息分流给不同消费者去处理，提高消费的速度，减少消息堆积。</p>
+<p>② 消息标示：消费者组会维护一个标示，记录最后一个被处理的消息。如果消费者宕机重启后，可以根据标示去继续处理，保证每个消息都会被消费。</p>
+<p>③ 消息确认：消费者获取到消息后，消息会保存到pending-list中，表示消息待处理。当消息处理完后，使用XACK进行消息确认，标记为消息已处理，然后从pending-list中移除。</p>
+<p><strong>实现思路：</strong>向Redis添加库存(商品ID作为Key，库存数作为value)和订单信息(使用Set集合可以保证不重复，商品ID作为Key，用户ID作为value)，使用Lua脚本封装购买资格判断的逻辑，然后在下单的时候调用Lua脚本先去判断是否有购买资格，如果没有则拒绝购买；如果有购买资格，则扣减库存，创建订单ID，然后将订单ID，商品ID，用户ID添加到消息队列中。然后将订单ID返回给前端，并且开启独立线程去执行秒杀下单操作，线程具体要执行的任务是先去读取消息队列的消息，判断是否有消息，如果没有则继续读取等待，如果有消息则进行解析出订单信息然后去访问数据库进行扣减库存和创建订单操作，最后进行ACK消息确认，整个过程可以保证消息可以被快速读取，减少消息的堆积，并且利用消息标示保证每个消息都会被处理，解决消息遗漏问题，最后利用消息确认机制保证每个消息都会被处理一次，实现异步秒杀下单功能，提高并发能力。</p>
+<h3 id="4-点赞和点赞排行榜"><a href="#4-点赞和点赞排行榜" class="headerlink" title="4. 点赞和点赞排行榜"></a>4. 点赞和点赞排行榜</h3><p><strong>实现思路：</strong>对于点赞信息，以点赞内容ID作为Key，用户ID作为value，用户的点赞时间戳作为sort保存到zSet集合中，当用户对某个内容进行点赞时，先去Redis中判断zset集合中该用户的sort值是否为null，如果为null说明没有点赞过，则进行sort值+1，并且将该用户ID保存到该zset集合中，然后数据库中对应的isLike字段值+1。如果sort不为null，说明已点赞过，则进行sort值-1，并且将该用户从zset集合中删除，然后再数据库中将对应的isLike字段值-1。对于点赞排行榜，则根据用户点赞的时间戳进行排序，时间戳作为sort值，然后要获取前五位点赞的用户使用命令rang(0,4)获取对应的用户ID，然后根据用户ID查询对应的用户信息(ORDER BY FIELD(“id”,5,1))返回给前端</p>
+<h3 id="5-好友关注"><a href="#5-好友关注" class="headerlink" title="5. 好友关注"></a>5. 好友关注</h3><p><strong>实现思路：</strong>数据库维护了一张tb_follow表，保存博主和粉丝的关系。Redis使用Set集合保存关注信息，粉丝ID作为Key，被关注的博主作为value。然后当用户关注某博主时，会先发起请求判断是否已关注，如果未关注，则将当前用户和博主ID保存到数据库和Redis中；如果已关注，则将当前用户和博主ID从数据库中删除，并删除Redis中的博主ID。</p>
+
+  </div>
+  
+    
+      <a id="older" class="blog-nav" href="/2023/01/11/Redis%E7%AF%87/">OLDER&nbsp;&gt;</a>
+      
+        
+            
+</div>
         <div class="footer">
   
     <div class="footer-more">
