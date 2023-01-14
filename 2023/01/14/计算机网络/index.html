@@ -11,8 +11,8 @@
   
   <title>
     
-      Tag 
-       : Java集合篇
+      计算机网络 
+      
       
     
   </title>
@@ -33,6 +33,10 @@
 
 
   
+
+  
+    
+<link rel="stylesheet" href="/css/post.css">
 
   
 
@@ -94,123 +98,103 @@
 
 
       <div class="main">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2023</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="计算机网络">
-        <div class="time-m-d">01-14</div>
-        <div class="title">
-          <a href="/2023/01/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-            
-              <span>计算机网络</span>
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="点评项目梳理">
-        <div class="time-m-d">01-13</div>
-        <div class="title">
-          <a href="/2023/01/13/%E7%82%B9%E8%AF%84%E9%A1%B9%E7%9B%AE%E6%A2%B3%E7%90%86/">
-            
-              <span>点评项目梳理</span>
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Redis篇">
-        <div class="time-m-d">01-11</div>
-        <div class="title">
-          <a href="/2023/01/11/Redis%E7%AF%87/">
-            
-              <span>Redis篇</span>
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="框架篇">
-        <div class="time-m-d">01-11</div>
-        <div class="title">
-          <a href="/2023/01/11/%E6%A1%86%E6%9E%B6%E7%AF%87/">
-            
-              <span>框架篇</span>
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="集合篇">
-        <div class="time-m-d">01-11</div>
-        <div class="title">
-          <a href="/2023/01/11/%E9%9B%86%E5%90%88%E7%AF%87/">
-            
-              <span>集合篇</span>
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="基础篇">
-        <div class="time-m-d">01-11</div>
-        <div class="title">
-          <a href="/2023/01/11/%E5%9F%BA%E7%A1%80%E7%AF%87/">
-            
-              <span>基础篇</span>
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="多线程篇">
-        <div class="time-m-d">01-11</div>
-        <div class="title">
-          <a href="/2023/01/11/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%AF%87/">
-            
-              <span>多线程篇</span>
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="MySQL篇">
-        <div class="time-m-d">01-11</div>
-        <div class="title">
-          <a href="/2023/01/11/MySQL%E7%AF%87/">
-            
-              <span>MySQL篇</span>
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Hello World">
-        <div class="time-m-d">01-10</div>
-        <div class="title">
-          <a href="/2023/01/10/hello-world/">
-            
-              <span>Hello World</span>
-            
-          </a>
-        </div>
-      </div>
-    
+<div class="post">
+  <h3 class="date">
+    Jan 14, 2023
+  </h3>
+  <h1>
+    计算机网络
+  </h1>
+  <div class="content markdown-body">
+    <h2 id="一、计算机网络"><a href="#一、计算机网络" class="headerlink" title="一、计算机网络"></a>一、计算机网络</h2><h3 id="1-TCP的三次握手和四次挥手"><a href="#1-TCP的三次握手和四次挥手" class="headerlink" title="1. TCP的三次握手和四次挥手"></a>1. TCP的三次握手和四次挥手</h3><p>TCP协议是7层网络协议的运输层协议，负责数据的可靠传输。</p>
+<p>在建立TCP连接时，需要通过三次握手来建立，过程为：</p>
+<ol>
+<li>客户端向服务端发送SYN</li>
+<li>服务端接收到SYN，然后向客户端发送SYN_ACK确认</li>
+<li>客户端收到SYN_ACK后，再向服务端发送ACK确认</li>
+</ol>
+<p>在断开TCP连接时，需要通过四次挥手来断开，过程为：</p>
+<ol>
+<li>客户端向服务端发送FIN</li>
+<li>服务端接收到FIN，然后向客户端发送ACK确认，此时客户端不能再发送数据了，而服务端可能还有数据正在处理</li>
+<li>服务端处理完数据后，向客户端发送FIN，表示服务端可以断开连接了</li>
+<li>客户端接收到FIN后，向服务端发送ACK确认，表示客户端断开连接了</li>
+</ol>
+<h3 id="2-TCP挥手为什么是四次，不能是三次？"><a href="#2-TCP挥手为什么是四次，不能是三次？" class="headerlink" title="2. TCP挥手为什么是四次，不能是三次？"></a>2. TCP挥手为什么是四次，不能是三次？</h3><p>因为TCP是面向连接的，也是面向双方的。在断开连接时，客户端会先向服务端发送断开请求，服务端接收到后进行确认，然后服务端也需要向客户端发送断开请求，客户端接收到后进行确认，此时才会真正断开连接。在这个过程中，TCP进行了四次来进行断开连接。如果TCP挥手是三次，则就是将服务端将ACK和FIN一起发送给客户端，这样就是三次挥手，但是客户端向服务端发送ACK后，服务端此时可能还有数据正在处理，就会导致等待服务端处理完数据后才向客户端发送ACK和FIN，而TCP有重发机制来保证报文的可达性，这个过程中如果客户端等待的时间较长，那么就会进行重发断开请求FIN，这样的话就会浪费资源。因此需要将服务端的ACK和断开请求FIN分开发送，因此需要四次挥手。</p>
+<h3 id="3-TCP和UDP的区别"><a href="#3-TCP和UDP的区别" class="headerlink" title="3. TCP和UDP的区别"></a>3. TCP和UDP的区别</h3><p>TCP是一个面向连接的、可靠的、基于字节流的传输层协议</p>
+<p>UDP是一个面向无连接的传输层协议，基于数据报文段的传输层协议</p>
+<p><strong>面向连接：</strong>所谓连接就是客户端和服务端的连接。在双方建立连接之前，会进行TCP的三次握手；而UDP是没有建立连接的过程。</p>
+<p><strong>可靠性：</strong></p>
+<ol>
+<li>TCP有状态：TCP会精准地记录哪些数据发送了哪些没有发送，哪些数据被对方接收了哪些没有被接收，而且保证数据包按序到达，不允许有半点差错。</li>
+<li>TCP可控制：TCP在意识到丢包或者网络环境差的情况，它会根据具体情况控制自己的发送速度或者重发。</li>
+</ol>
+<h3 id="4-BIO、NIO、AIO分别是什么"><a href="#4-BIO、NIO、AIO分别是什么" class="headerlink" title="4. BIO、NIO、AIO分别是什么"></a>4. BIO、NIO、AIO分别是什么</h3><p>BIO：同步阻塞IO，使用线程读取数据时，线程会阻塞，并且需要线程主动去查询是否有数据可读，并且需要处理完一个Socket后才能处理下一个Socket</p>
+<p>NIO：同步非阻塞IO，使用线程读取数据时，线程不会阻塞，但需要线程主动去查询是否有IO事件</p>
+<p>AIO：异步非阻塞IO，也叫做NIO2.0。使用AIO读取数据时，线程不会阻塞，并且有数据可读时会异步地通知给线程，不需要线程主动去查询IO事件。</p>
+<h3 id="5-网络协议有哪些"><a href="#5-网络协议有哪些" class="headerlink" title="5. 网络协议有哪些"></a>5. 网络协议有哪些</h3><ol>
+<li>OSI的七层协议：物理层、数据链路层、网络层、运输层、会话层、表示层、应用层。</li>
+<li>TCP&#x2F;IP的四层协议：网路接口层、网际层、运输层、应用层。</li>
+<li>五层协议：物理层、数据链路层、网络层、运输层、应用层。</li>
+</ol>
+<h3 id="6-HTTP和HTTPS的区别"><a href="#6-HTTP和HTTPS的区别" class="headerlink" title="6. HTTP和HTTPS的区别"></a>6. HTTP和HTTPS的区别</h3><ol>
+<li><p>端口：HTTP的URL是”http:&#x2F;&#x2F;“开头并且默认端口是80；而HTTPS的URL是”https:&#x2F;&#x2F;“开头并且默认端口是443</p>
+</li>
+<li><p>安全性：HTTP运行在TCP之上，并且所有传输的内容都是明文，客户端和服务端无法验证对方的身份；而HTTPS运行在SSL&#x2F;TLS之上，并且所有传输的内容都经过了加密，加密采用对称加密，但是对称加密的密钥用服务器方的证书进行非对称加密。因此HTTPS的安全性比HTTP高。</p>
+<p>对称加密：密钥只有一个，加密解密使用同一个密钥，且加密速度快，加密算法如：DES、AES</p>
+<p>非对称加密：密钥成对出现，加密解密使用不同的密钥，公钥无法推知私钥，私钥也无法推知公钥。并且加密速度慢，加密算法如：RSA、DSA。</p>
+</li>
+<li><p>资源消耗：因为HTTPS传输的内容是经过加密的，所以HTTPS比HTTP消耗更多的服务器资源。</p>
+</li>
+</ol>
+<h3 id="7-打开一个网页，整个过程会使用哪些协议？"><a href="#7-打开一个网页，整个过程会使用哪些协议？" class="headerlink" title="7. 打开一个网页，整个过程会使用哪些协议？"></a>7. 打开一个网页，整个过程会使用哪些协议？</h3><ol>
+<li>浏览器会使用DNS去解析域名对应的IP</li>
+<li>浏览器和服务器建立TCP连接</li>
+<li>浏览器向服务器发送HTTP请求</li>
+<li>服务器处理请求并返回HTTP报文</li>
+<li>断开连接</li>
+</ol>
+<h3 id="8-TCP协议如何保证可靠传输"><a href="#8-TCP协议如何保证可靠传输" class="headerlink" title="8. TCP协议如何保证可靠传输"></a>8. TCP协议如何保证可靠传输</h3><ol>
+<li><p>应用数据会被分割成TCP认为最适合发送的数据块</p>
+</li>
+<li><p>TCP给发送的每一个包进行编号，接收方会对数据包进行排序，并按序传送给应用层。</p>
+</li>
+<li><p>TCP的接收端会丢弃掉重复的数据</p>
+</li>
+<li><p>流量控制：当接收方来不及处理发送方的数据时，会控制发送方的发送速率。TCP使用滑动窗口来实现流量控制，具体为接收方的确认报文中的窗口字段会限制发送方的窗口大小，以此来控制发送方的发送速率。</p>
+<p>滑动窗口的四种算法：慢开始、拥塞避免、快重传和快恢复。</p>
+</li>
+<li><p>拥塞控制：当网络拥塞时，可以减少数据的发送。</p>
+</li>
+<li><p>ARQ协议：自动重传请求，即每发送一个分组后停止发送，等待确认后再发送下一个分组。</p>
+</li>
+<li><p>超时重传：TCP发送报文后，会启动一个定时器，如果接收方超时没有确认，则会重新发送这个报文。</p>
+</li>
+</ol>
+
   </div>
+  
+    
+      <a id="older" class="blog-nav" href="/2023/01/13/%E7%82%B9%E8%AF%84%E9%A1%B9%E7%9B%AE%E6%A2%B3%E7%90%86/">OLDER&nbsp;&gt;</a>
+      
+        
+            
 </div>
-
         <div class="footer">
   
     <div class="footer-more">
